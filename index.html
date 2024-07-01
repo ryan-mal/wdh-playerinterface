@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waterdeep: Dragon Heist - Player Interface</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <h1>Waterdeep: Dragon Heist</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#characters">Characters</a></li>
+                <li><a href="#map">City Map</a></li>
+                <li><a href="#quests">Quests</a></li>
+				<li><a href="NPC.html">NPCs</a></li> <!-- Added link to NPC.html -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <div class="hero">
+                <h2>Welcome to the Shadowy Streets of Waterdeep</h2>
+                <p>Unravel mysteries, forge alliances, and pull off the ultimate heist in this thrilling adventure.</p>
+            </div>
+        </section>
+
+		<section id="characters">
+			<h2>Player Characters</h2>
+			<div class="container">
+				<a href="elroy.html" class="card-link">
+					<div class="cards" style="background-image: url('elroy_image_full3.png');">
+						<div class="overlay">
+							<h2>Elroy</h2>
+						</div>
+					</div>
+				</a>
+				<a href="jamie.html" class="card-link">
+					<div class="cards" style="background-image: url('jamie_image_full.png');">
+						<div class="overlay">
+							<h2>Jamie</h2>
+						</div>
+					</div>
+				</a>
+				<a href="laplace.html" class="card-link">
+					<div class="cards" style="background-image: url('laplace_image_full.png');">
+						<div class="overlay">
+							<h2>Laplace</h2>
+						</div>
+					</div>
+				</a>
+				<a href="vernon.html" class="card-link">
+					<div class="cards" style="background-image: url('vernon_image_full.png');">
+						<div class="overlay">
+							<h2>Vernon</h2>
+						</div>
+					</div>
+				</a>
+			</div>
+		</section>
+
+
+
+
+
+
+        <section id="map">
+            <h2>Waterdeep City Map</h2>
+            <div class="map-placeholder">
+                <i class="fas fa-map-marked-alt"></i>
+                <p>Interactive city map coming soon!</p>
+            </div>
+        </section>
+
+        <section id="quests">
+            <h2>Active Quests</h2>
+            <ul class="quest-list">
+                <li>
+                    <i class="fas fa-lock"></i>
+                    <span>Infiltrate the Xanathar Guild</span>
+                </li>
+                <li>
+                    <i class="fas fa-gem"></i>
+                    <span>Locate the Hidden Vault</span>
+                </li>
+                <li>
+                    <i class="fas fa-user-secret"></i>
+                    <span>Uncover the Masked Lord's Identity</span>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Waterdeep: Dragon Heist Campaign. All rights reserved.</p>
+    </footer>
+</body>
+</html>

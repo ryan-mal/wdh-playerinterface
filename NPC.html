@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waterdeep: Dragon Heist - NPC Masterlist</title>
+    <link rel="stylesheet" href="NPCstyles.css">
+    <script src="https://kit.fontawesome.com/d6c42b2045.js" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/isotope/3.0.6/isotope.pkgd.min.js"></script>
+	<script src="npc-masterlist.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Waterdeep: Dragon Heist</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#characters">Characters</a></li>
+                <li><a href="index.html#map">City Map</a></li>
+                <li><a href="index.html#quests">Quests</a></li>
+                <li><a href="#" class="active">NPC Masterlist</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="npc-masterlist">
+            <h2>NPC Masterlist</h2>
+            <div class="filter-container">
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="Search NPCs...">
+                    <button id="search-button"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="*">All</button>
+                    <button class="filter-btn" data-filter=".faction-harpers">Harpers</button>
+                    <button class="filter-btn" data-filter=".faction-zhentarim">Zhentarim</button>
+                    <button class="filter-btn" data-filter=".faction-xanathar">Xanathar Guild</button>
+                    <button class="filter-btn" data-filter=".faction-lords">Lords' Alliance</button>
+                    <button class="filter-btn" data-filter=".location-dock">Dock Ward</button>
+                    <button class="filter-btn" data-filter=".location-castle">Castle Ward</button>
+                    <button class="filter-btn" data-filter=".location-field">Field Ward</button>
+                </div>
+            </div>
+            <div class="npc-grid">
+                <!-- NPC cards will be dynamically added here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Waterdeep: Dragon Heist Campaign. All rights reserved.</p>
+    </footer>
+
+    <script src="npc-masterlist.js"></script>
+</body>
+</html>
