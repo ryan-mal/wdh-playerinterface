@@ -4,7 +4,7 @@ const npcs = [
         title: "Blackstaff",
         location: "Castle Ward",
         factions: ["Grey Hands", "Blackstaff Academy"],
-        image: "NPC_Images/Vajra_Safahr.png",
+        image: "images/NPC_Images/Vajra_Safahr.png",
         description: "The Seventh Blackstaff, archmage of Waterdeep, and leader of the Grey Hands and Blackstaff Academy."
     },
     {
@@ -12,7 +12,7 @@ const npcs = [
         title: "",
         location: "Dock Ward",
         factions: ["Zhentarim (DR)"],
-        image: "NPC_Images/Davil_Starsong.png",
+        image: "images/NPC_Images/Davil_Starsong.png",
         description: "A charismatic elven bard who serves as a public face for the Doom Raider Zhentarim splinter group in Waterdeep."
     },
     {
@@ -20,7 +20,7 @@ const npcs = [
         title: "Open Lord",
         location: "Castle Ward",
         factions: ["Lord's Alliance"],
-        image: "NPC_Images/Laeral_Silverhand.png",
+        image: "images/NPC_Images/Laeral_Silverhand.png",
         description: "The Open Lord of Waterdeep, a powerful mage and diplomat who governs the city."
     },
 	
@@ -29,7 +29,7 @@ const npcs = [
         title: "High Harper",
         location: "Castle Ward",
         factions: ["Harpers"],
-        image: "NPC_Images/Mirt.png",
+        image: "images/NPC_Images/Mirt.png",
         description: "The Leader of the Waterdeep Harper Sect."
     },
 	
@@ -38,7 +38,7 @@ const npcs = [
         title: "Don",
         location: "Undermountain/Skullport",
         factions: ["Xanathars Thieves Guild"],
-        image: "NPC_Images/Xanathar.png",
+        image: "images/NPC_Images/Xanathar.png",
         description: "The Leader of the underground thieves guild."
     }
 
