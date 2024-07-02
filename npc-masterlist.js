@@ -1,4 +1,4 @@
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
     const npcs = [
         {
             name: "Vajra Safahr",
@@ -47,31 +47,44 @@ $(document).ready(function() {
         `;
     }
 
-    const $grid = $('.npc-grid');
+    const grid = document.querySelector('.npc-grid');
     npcs.forEach(npc => {
-        $grid.append(createNPCCard(npc));
+        grid.innerHTML += createNPCCard(npc);
     });
 
-    const iso = new Isotope($grid[0], {
-		itemSelector: '.npc-card',
-		layoutMode: 'fitRows'
-	});
-	console.log('Isotope initialized:', iso);
+    let iso;
 
-    $('.filter-btn').on('click', function() {
-        const filterValue = $(this).attr('data-filter');
-        iso.arrange({ filter: filterValue });
-        $('.filter-btn').removeClass('active');
-        $(this).addClass('active');
+    imagesLoaded(grid, function() {
+        iso = new Isotope(grid, {
+            itemSelector: '.npc-card',
+            layoutMode: 'fitRows'
+        });
+        console.log('Isotope initialized:', iso);
     });
 
-    $('#search-input').on('keyup', function() {
-        const searchText = $(this).val().toLowerCase();
+    // Filter button functionality
+    document.querySelectorAll('.filter-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const filterValue = this.getAttribute('data-filter');
+            iso.arrange({ filter: filterValue });
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // Search functionality
+    document.getElementById('search-input').addEventListener('keyup', function() {
+        const searchText = this.value.toLowerCase();
         iso.arrange({
             filter: function(itemElem) {
-                const name = $(itemElem).find('.npc-name').text().toLowerCase();
-                const description = $(itemElem).find('.npc-description').text().toLowerCase();
-                return name.includes(searchText) || description.includes(searchText);
+                const name = itemElem.querySelector('.npc-name').textContent.toLowerCase();
+                const description = itemElem.querySelector('.npc-description').textContent.toLowerCase();
+                const faction = itemElem.querySelector('.npc-tag').textContent.toLowerCase();
+                const location = itemElem.querySelectorAll('.npc-tag')[1].textContent.toLowerCase();
+                return name.includes(searchText) || 
+                       description.includes(searchText) || 
+                       faction.includes(searchText) || 
+                       location.includes(searchText);
             }
         });
     });
