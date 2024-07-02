@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waterdeep: Dragon Heist - NPC Masterlist</title>
+    <link rel="stylesheet" href="NPCstyles.css">
+</head>
+<body>
+    <header>
+        <h1>Waterdeep: Dragon Heist</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#characters">Characters</a></li>
+                <li><a href="index.html#map">City Map</a></li>
+                <li><a href="index.html#quests">Quests</a></li>
+                <li><a href="#" class="active">NPCs</a></li>
+            </ul>
+        </nav>
+    </header>
+	
+	<h1></h1>
+	<br>
+    
+    <div class="filter-container">
+        <h2>Filter by Location</h2>
+        <div class="filter-buttons">
+            <button class="filter-button" aria-label="Filter by Ardeep Forest" onclick="toggleFilter('location', 'Ardeep Forest')">Ardeep Forest</button>
+            <button class="filter-button" aria-label="Filter by Castle Ward" onclick="toggleFilter('location', 'Castle Ward')">Castle Ward</button>
+            <button class="filter-button" aria-label="Filter by Dock Ward" onclick="toggleFilter('location', 'Dock Ward')">Dock Ward</button>
+            <button class="filter-button" aria-label="Filter by Field Ward" onclick="toggleFilter('location', 'Field Ward')">Field Ward</button>
+            <button class="filter-button" aria-label="Filter by North Ward" onclick="toggleFilter('location', 'North Ward')">North Ward</button>
+            <button class="filter-button" aria-label="Filter by Sea Ward" onclick="toggleFilter('location', 'Sea Ward')">Sea Ward</button>
+            <button class="filter-button" aria-label="Filter by Southern Ward" onclick="toggleFilter('location', 'Southern Ward')">Southern Ward</button>
+            <button class="filter-button" aria-label="Filter by Trades Ward" onclick="toggleFilter('location', 'Trades Ward')">Trades Ward</button>
+            <button class="filter-button" aria-label="Filter by Undercliff" onclick="toggleFilter('location', 'Undercliff')">Undercliff</button>
+            <button class="filter-button" aria-label="Filter by Undermountain/Skullport" onclick="toggleFilter('location', 'Undermountain/Skullport')">Undermountain/Skullport</button>
+        </div>
+
+        <h2>Filter by Faction</h2>
+        <div class="filter-buttons">
+            <button class="filter-button" aria-label="Filter by Blackstaff Academy" onclick="toggleFilter('faction', 'Blackstaff Academy')">Blackstaff Academy</button>
+            <button class="filter-button" aria-label="Filter by Bregan D'aerthe" onclick="toggleFilter('faction', 'Bregan Daerthe')">Bregan D'aerthe</button>
+            <button class="filter-button" aria-label="Filter by Cult of Asmodeus" onclick="toggleFilter('faction', 'Cult of Asmodeus')">Cult of Asmodeus</button>
+            <button class="filter-button" aria-label="Filter by Emerald Enclave" onclick="toggleFilter('faction', 'Emerald Enclave')">Emerald Enclave</button>
+            <button class="filter-button" aria-label="Filter by Grey Hands" onclick="toggleFilter('faction', 'Grey Hands')">Grey Hands</button>
+            <button class="filter-button" aria-label="Filter by Harpers" onclick="toggleFilter('faction', 'Harpers')">Harpers</button>
+            <button class="filter-button" aria-label="Filter by Lord's Alliance" onclick="toggleFilter('faction', 'Lords Alliance')">Lord's Alliance</button>
+            <button class="filter-button" aria-label="Filter by Zhentarim (Manshoon)" onclick="toggleFilter('faction', 'Manshoon Zhentarim')">Zhentarim (M)</button>
+            <button class="filter-button" aria-label="Filter by Zhentarim (Doom Raiders)" onclick="toggleFilter('faction', 'Doom Raider Zhentarim')">Zhentarim (DR)</button>
+            <button class="filter-button" aria-label="Filter by Xanathar's Thieves' Guild" onclick="toggleFilter('faction', 'Xanathars Thieves Guild')">Xanathar's Thieves' Guild</button>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" id="search-input" aria-label="Search NPCs" placeholder="Search NPCs...">
+        </div>
+        
+        <button class="filter-button" onclick="showAll()">Show All</button>
+        <button class="filter-button" onclick="clearFilters()">Clear Filters</button>
+    </div>
+
+    <main id="main-content" class="grid-container">
+	
+    </main>
+	
+    <footer>
+        <p>&copy; 2024 Waterdeep: Dragon Heist Campaign. All rights reserved.</p>
+    </footer>
+
+	
+    <button id="back-to-top" aria-label="Back to top">↑</button>
+
+    <script src="npc-masterlist.js"></script>
+</body>
+</html>
