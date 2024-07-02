@@ -32,7 +32,7 @@ const npcs = [
         image: "images/NPC_Images/Mirt.png",
         description: "The Leader of the Waterdeep Harper Sect."
     },
-	
+
     {
         name: "Xanathar",
         title: "Don",
