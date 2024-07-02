@@ -79,12 +79,10 @@ document.addEventListener('DOMContentLoaded', function() {
             filter: function(itemElem) {
                 const name = itemElem.querySelector('.npc-name').textContent.toLowerCase();
                 const description = itemElem.querySelector('.npc-description').textContent.toLowerCase();
-                const faction = itemElem.querySelector('.npc-tag').textContent.toLowerCase();
-                const location = itemElem.querySelectorAll('.npc-tag')[1].textContent.toLowerCase();
+                const tags = Array.from(itemElem.querySelectorAll('.npc-tag')).map(tag => tag.textContent.toLowerCase());
                 return name.includes(searchText) || 
                        description.includes(searchText) || 
-                       faction.includes(searchText) || 
-                       location.includes(searchText);
+                       tags.some(tag => tag.includes(searchText));
             }
         });
     });
