@@ -1,46 +1,47 @@
 const locations = [
     {
         name: "The Yawning Portal",
-        type: "Inn, Tavern, Festhall",
+        type: ["Inn, Tavern, Festhall"],
         ward: "Castle Ward",
         image: "images/Location_Images/Yawning_Portal.png",
         description: "A famous tavern built atop the entrance to the Undermountain dungeon."
     },
     {
         name: "Blackstaff Tower",
-        type: "Landmark",
+        type: ["Base", "Academy"],
         ward: "Castle Ward",
         image: "images/Location_Images/Blackstaff_Tower.png",
         description: "Home and workplace of Waterdeep's archmage, shrouded in magical mystery."
     },
     {
         name: "House of Inspired Hands",
-        type: "Temple",
+        type: ["Temple"],
         ward: "Trades Ward",
         image: "images/Location_Images/House_of_Inspired_Hands.png",
         description: "A temple dedicated to Gond, the god of craft and innovation."
     },
     {
         name: "The Bent Nail",
-        type: "Blacksmith",
+        type: ["Business"],
         ward: "North Ward",
         image: "images/Location_Images/bent_nail.png",
         description: "A reputable blacksmith known for quality weapons and armor."
     },
     {
         name: "Trollskull Manor",
-        type: "Landmark",
+        type: ["Base", "Residence", "Inn, Tavern, Festhall"],
         ward: "North Ward",
         image: "images/Location_Images/Trollskull_Manor.png",
         description: "An old, possibly haunted manor with a storied history."
     },
-	    {
+    {
         name: "Archway Commons",
-        type: "Landmark",
+        type: ["Miscellaneous"],
         ward: "Castle Ward",
         image: "images/Location_Images/Archway_Commons.png",
         description: "A common park usually for students of Blackstaff Academy."
     }
+
     // Add more locations as needed. Remember, they must all end with a , other then the last entry
 ];
 
@@ -99,7 +100,7 @@ function filterLocations() {
         const locationElement = document.getElementById(`location-${location.name.replace(/\s+/g, '-').toLowerCase()}`);
         const matchesSearch = location.name.toLowerCase().includes(searchTerm) || location.description.toLowerCase().includes(searchTerm);
         const matchesWard = activeFilters.ward.size === 0 || activeFilters.ward.has(location.ward);
-        const matchesType = activeFilters.type.size === 0 || activeFilters.type.has(location.type);
+        const matchesType = activeFilters.type.size === 0 || location.type.some(type => activeFilters.type.has(type));
 
         if (matchesSearch && matchesWard && matchesType) {
             locationElement.classList.remove('hidden');
@@ -123,14 +124,14 @@ function sortLocations() {
 
 function createLocationTile(location) {
     return `
-    <div class="location-tile" id="location-${location.name.replace(/\s+/g, '-').toLowerCase()}" data-ward="${location.ward}" data-type="${location.type}">
+    <div class="location-tile" id="location-${location.name.replace(/\s+/g, '-').toLowerCase()}" data-ward="${location.ward}" data-type="${location.type.join(',')}">
         <div class="image-container">
             <img src="placeholder.png" data-src="${location.image}" alt="${location.name}" class="location-img lazy">
         </div>
         <div class="location-content">
             <h2>${location.name}</h2>
-            <p class="location-type">${location.type}</p>
-            <p class="location-ward">${location.ward}</p>
+            <p class="ward-tag" title="${location.ward}">${location.ward}</p>
+            ${location.type.map(type => `<p class="type-tag" title="${type}">${type}</p>`).join('')}
             <p class="location-description">${location.description}</p>
         </div>
     </div>

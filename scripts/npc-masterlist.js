@@ -2,7 +2,7 @@ const npcs = [
     {
         name: "Vajra Safahr",
         title: "Blackstaff",
-        location: "Castle Ward",
+        ward: "Castle Ward",
         factions: ["Grey Hands", "Blackstaff Academy"],
         image: "images/NPC_Images/Vajra_Safahr.png",
         description: "The Seventh Blackstaff, archmage of Waterdeep, and leader of the Grey Hands and Blackstaff Academy.",
@@ -11,7 +11,7 @@ const npcs = [
     {
         name: "Davil Starsong",
         title: "",
-        location: "Dock Ward",
+        ward: "Dock Ward",
         factions: ["Doom Raider Zhentarim"],
         image: "images/NPC_Images/Davil_Starsong.png",
         description: "A charismatic elven bard who serves as a public face for the Doom Raider Zhentarim splinter group in Waterdeep.",
@@ -20,7 +20,7 @@ const npcs = [
     {
         name: "Laeral Silverhand",
         title: "Open Lord",
-        location: "Castle Ward",
+        ward: "Castle Ward",
         factions: ["Lords Alliance"],
         image: "images/NPC_Images/Laeral_Silverhand.png",
         description: "The Open Lord of Waterdeep, a powerful mage and diplomat who governs the city.",
@@ -29,7 +29,7 @@ const npcs = [
     {
         name: "Mirt",
         title: "High Harper",
-        location: "Castle Ward",
+        ward: "Castle Ward",
         factions: ["Harpers"],
         image: "images/NPC_Images/Mirt.png",
         description: "The Leader of the Waterdeep Harper Sect.",
@@ -38,7 +38,7 @@ const npcs = [
     {
         name: "Xanathar",
         title: "Don",
-        location: "Undermountain/Skullport",
+        ward: "Undermountain/Skullport",
         factions: ["Xanathar's Thieves' Guild"],
         image: "images/NPC_Images/Xanathar.png",
         description: "The Leader of the underground thieves guild.",
@@ -47,7 +47,7 @@ const npcs = [
 ];
 
 const activeFilters = {
-    location: new Set(),
+    ward: new Set(),
     faction: new Set()
 };
 
@@ -96,7 +96,7 @@ function showAll() {
 }
 
 function clearFilters() {
-    activeFilters.location.clear();
+    activeFilters.ward.clear();
     activeFilters.faction.clear();
     document.querySelectorAll('.filter-button').forEach(button => {
         button.classList.remove('active');
@@ -110,14 +110,14 @@ function filterNPCs() {
     npcs.forEach(npc => {
         const title = npc.querySelector('.npc-title').textContent.toLowerCase();
         const name = npc.querySelector('h2').textContent.toLowerCase();
-        const location = npc.getAttribute('data-location');
+        const ward = npc.getAttribute('data-ward');
         const factions = npc.getAttribute('data-faction').split(',');
         
         const matchesSearch = title.includes(searchTerm) || name.includes(searchTerm);
-        const matchesLocation = activeFilters.location.size === 0 || activeFilters.location.has(location);
+        const matchesWard = activeFilters.ward.size === 0 || activeFilters.ward.has(ward);
         const matchesFaction = activeFilters.faction.size === 0 || factions.some(faction => activeFilters.faction.has(faction));
         
-        if (matchesSearch && matchesLocation && matchesFaction) {
+        if (matchesSearch && matchesWard && matchesFaction) {
             npc.classList.remove('hidden');
         } else {
             npc.classList.add('hidden');
@@ -142,7 +142,7 @@ function sortNPCs() {
 
 function createNPCCard(npc) {
     return `
-    <div class="npc-item ${npc.status}" data-location="${npc.location}" data-faction="${npc.factions.join(',')}">
+    <div class="npc-item ${npc.status}" data-ward="${npc.ward}" data-faction="${npc.factions.join(',')}">
         <div class="image-container">
             <img src="placeholder.png" data-src="${npc.image}" alt="${npc.name}" class="profile-img lazy">
             ${npc.status === 'dead' ? '<div class="status-overlay">Deceased</div>' : ''}
@@ -150,7 +150,7 @@ function createNPCCard(npc) {
         <div class="npc-content">
             <p class="npc-title">${npc.title || ''}</p>
             <h2>${npc.name}</h2>
-            <p class="location-tag">${npc.location}</p>
+            <p class="ward-tag">${npc.ward}</p>
             ${npc.factions.map(faction => `<p class="faction-tag" title="${faction}">${faction}</p>`).join('')}
             <p class="description">${npc.description}</p>
         </div>
