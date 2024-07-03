@@ -60,6 +60,7 @@ const npcs = [
     }
 ];
 
+// Active filter sets
 const activeFilters = {
     ward: new Set(),
     faction: new Set(),
@@ -67,29 +68,18 @@ const activeFilters = {
     race: new Set()
 };
 
+// DOM element references
 const searchInput = document.getElementById('search-input');
 const backToTopButton = document.getElementById('back-to-top');
 const filterToggle = document.getElementById('filter-toggle');
 const filterDropdown = document.getElementById('filter-dropdown');
+const npcList = document.getElementById('main-content');
 
+// Event listeners
 searchInput.addEventListener('input', filterNPCs);
-
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        backToTopButton.style.display = 'block';
-    } else {
-        backToTopButton.style.display = 'none';
-    }
-});
-
-backToTopButton.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-filterToggle.addEventListener('click', () => {
-    filterDropdown.classList.toggle('open');
-    filterToggle.textContent = filterDropdown.classList.contains('open') ? 'Filters ▲' : 'Filters ▼';
-});
+window.addEventListener('scroll', handleScroll);
+backToTopButton.addEventListener('click', scrollToTop);
+filterToggle.addEventListener('click', toggleFilterDropdown);
 
 function toggleFilter(filterType, value) {
     const button = document.querySelector(`button[onclick="toggleFilter('${filterType}', '${value}')"]`);
@@ -109,13 +99,8 @@ function showAll() {
 }
 
 function clearFilters() {
-    activeFilters.ward.clear();
-    activeFilters.faction.clear();
-    activeFilters.status.clear();
-    activeFilters.race.clear();
-    document.querySelectorAll('.filter-button').forEach(button => {
-        button.classList.remove('active');
-    });
+    Object.keys(activeFilters).forEach(key => activeFilters[key].clear());
+    document.querySelectorAll('.filter-button').forEach(button => button.classList.remove('active'));
     searchInput.value = '';
 }
 
@@ -143,49 +128,48 @@ function filterNPCs() {
 }
 
 function displayNPCs(filteredNPCs) {
-    const npcList = document.getElementById('main-content');
-    npcList.innerHTML = filteredNPCs.map(npc => createNPCCard(npc, false)).join('');
+    npcList.innerHTML = filteredNPCs.map(npc => createNPCCard(npc)).join('');
     sortNPCs();
 }
 
 function sortNPCs() {
-    const npcList = document.getElementById('main-content');
     const npcs = Array.from(npcList.children);
-    
-    npcs.sort((a, b) => {
-        const nameA = a.querySelector('h2').textContent.toLowerCase();
-        const nameB = b.querySelector('h2').textContent.toLowerCase();
-        return nameA.localeCompare(nameB);
-    });
-    
+    npcs.sort((a, b) => a.querySelector('h2').textContent.localeCompare(b.querySelector('h2').textContent));
     npcs.forEach(npc => npcList.appendChild(npc));
 }
 
-function createNPCCard(npc, useLazyLoading = true) {
+function createNPCCard(npc) {
+    const { name, title, wards, factions, status, race, image, description, isAlive } = npc;
+    const npcId = name.replace(/\s+/g, '-').toLowerCase();
+    
     return `
-    <div class="npc-item ${npc.isAlive ? 'alive' : 'dead'}" 
-         data-wards="${npc.wards.join(',')}" 
-         data-factions="${npc.factions.join(',')}"
-         data-status="${npc.status.join(',')}"
-         data-race="${npc.race.join(',')}"
-         onclick="openModal('${npc.name.replace(/\s+/g, '-').toLowerCase()}')">
+    <div class="npc-item ${isAlive ? 'alive' : 'dead'}" 
+         data-wards="${wards.join(',')}" 
+         data-factions="${factions.join(',')}"
+         data-status="${status.join(',')}"
+         data-race="${race.join(',')}"
+         onclick="openModal('${npcId}')">
         <div class="image-container">
-            <img ${useLazyLoading ? 'data-src' : 'src'}="${npc.image}" alt="${npc.name}" class="profile-img ${useLazyLoading ? 'lazy' : ''}">
-            ${!npc.isAlive ? '<div class="status-overlay">Deceased</div>' : ''}
+            <img src="${image}" alt="${name}" class="profile-img">
+            ${!isAlive ? '<div class="status-overlay">Deceased</div>' : ''}
         </div>
         <div class="npc-content">
-            <p class="npc-title">${npc.title || ''}</p>
-            <h2>${npc.name}</h2>
+            <p class="npc-title">${title || ''}</p>
+            <h2>${name}</h2>
             <div class="tags-container">
-                ${npc.wards.map(ward => `<span class="tag ward-tag" title="Ward">${ward}</span>`).join('')}
-                ${npc.factions.map(faction => `<span class="tag faction-tag" title="Faction">${faction}</span>`).join('')}
-                ${npc.status.map(status => `<span class="tag status-tag" title="Status">${status}</span>`).join('')}
-                ${npc.race.map(race => `<span class="tag race-tag" title="Race">${race}</span>`).join('')}
+                ${createTags(wards, 'ward')}
+                ${createTags(factions, 'faction')}
+                ${createTags(status, 'status')}
+                ${createTags(race, 'race')}
             </div>
-            <p class="description">${npc.description}</p>
+            <p class="description">${description}</p>
         </div>
     </div>
     `;
+}
+
+function createTags(items, type) {
+    return items.map(item => `<span class="tag ${type}-tag" title="${type.charAt(0).toUpperCase() + type.slice(1)}">${item}</span>`).join('');
 }
 
 function openModal(npcId) {
@@ -201,25 +185,27 @@ function openModal(npcId) {
 }
 
 function createModalContent(npc) {
+    const { name, title, wards, factions, status, race, image, description, notableInfo } = npc;
+    
     return `
         <div class="modal-header">
-            <h2>${npc.name}</h2>
-            <p class="npc-title">${npc.title || ''}</p>
+            <h2>${name}</h2>
+            <p class="npc-title">${title || ''}</p>
         </div>
         <div class="modal-body">
-            <img src="${npc.image}" alt="${npc.name}" class="modal-img">
+            <img src="${image}" alt="${name}" class="modal-img">
             <div class="modal-info">
                 <div class="tags-container">
-                    ${npc.wards.map(ward => `<span class="tag ward-tag" title="Ward">${ward}</span>`).join('')}
-                    ${npc.factions.map(faction => `<span class="tag faction-tag" title="Faction">${faction}</span>`).join('')}
-                    ${npc.status.map(status => `<span class="tag status-tag" title="Status">${status}</span>`).join('')}
-                    ${npc.race.map(race => `<span class="tag race-tag" title="Race">${race}</span>`).join('')}
+                    ${createTags(wards, 'ward')}
+                    ${createTags(factions, 'faction')}
+                    ${createTags(status, 'status')}
+                    ${createTags(race, 'race')}
                 </div>
-                <p class="modal-description">${npc.description}</p>
-                ${npc.notableInfo ? `
+                <p class="modal-description">${description}</p>
+                ${notableInfo ? `
                 <div class="modal-notable-info">
                     <h3>Notable Information</h3>
-                    <p>${npc.notableInfo}</p>
+                    <p>${notableInfo}</p>
                 </div>
                 ` : ''}
             </div>
@@ -227,25 +213,21 @@ function createModalContent(npc) {
     `;
 }
 
-// Close modal when clicking the close button or outside the modal
-window.onclick = function(event) {
-    const modal = document.getElementById('npc-modal');
-    if (event.target == modal || event.target.className == 'close') {
-        modal.style.display = 'none';
-        window.location.hash = '';
-    }
+function handleScroll() {
+    backToTopButton.style.display = window.pageYOffset > 300 ? 'block' : 'none';
 }
 
-// Check for hash in URL on page load
-window.onload = function() {
-    if(window.location.hash) {
-        const npcId = window.location.hash.substring(1);
-        openModal(npcId);
-    }
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleFilterDropdown() {
+    filterDropdown.classList.toggle('open');
+    filterToggle.textContent = filterDropdown.classList.contains('open') ? 'Filters ▲' : 'Filters ▼';
 }
 
 function initializeLazyLoading() {
-    const lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+    const lazyImages = document.querySelectorAll("img.lazy");
     
     if ("IntersectionObserver" in window) {
         const lazyImageObserver = new IntersectionObserver((entries, observer) => {
@@ -271,22 +253,16 @@ function initializeLazyLoading() {
     }
 }
 
+// Initialize page
 document.addEventListener("DOMContentLoaded", () => {
-    const npcList = document.getElementById('main-content');
-    npcList.innerHTML = npcs.map(npc => createNPCCard(npc, true)).join('');
-    sortNPCs();
+    displayNPCs(npcs);
     initializeLazyLoading();
 
     document.querySelectorAll('.filter-title').forEach(title => {
         title.addEventListener('click', () => {
             const filterSection = title.closest('.filter-section');
             filterSection.classList.toggle('open');
-            
-            // Update arrow
-            const arrow = title.querySelector('.arrow');
-            arrow.textContent = filterSection.classList.contains('open') ? '▲' : '▼';
 
-            // Animate filter buttons
             const filterButtons = filterSection.querySelectorAll('.filter-button');
             filterButtons.forEach((button, index) => {
                 setTimeout(() => {
@@ -296,4 +272,19 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     });
+
+    // Check for hash in URL on page load
+    if(window.location.hash) {
+        const npcId = window.location.hash.substring(1);
+        openModal(npcId);
+    }
 });
+
+// Close modal when clicking outside or on close button
+window.onclick = function(event) {
+    const modal = document.getElementById('npc-modal');
+    if (event.target == modal || event.target.className == 'close') {
+        modal.style.display = 'none';
+        window.location.hash = '';
+    }
+};
