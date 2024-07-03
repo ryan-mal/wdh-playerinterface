@@ -6,7 +6,7 @@ const npcs = [
         factions: ["Grey Hands", "Blackstaff Academy"],
         image: "images/NPC_Images/Vajra_Safahr.png",
         description: "The Seventh Blackstaff, archmage of Waterdeep, and leader of the Grey Hands and Blackstaff Academy.",
-        status: "dead"
+        status: "alive"
     },
     {
         name: "Davil Starsong",
@@ -39,7 +39,7 @@ const npcs = [
         name: "Xanathar",
         title: "Don",
         ward: "Undermountain/Skullport",
-        factions: ["Xanathar's Thieves' Guild"],
+        factions: ["Xanathars Thieves Guild"],
         image: "images/NPC_Images/Xanathar.png",
         description: "The Leader of the underground thieves guild.",
 		status: "alive"
