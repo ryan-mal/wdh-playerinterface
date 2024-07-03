@@ -1,7 +1,7 @@
 const locations = [
     {
         name: "The Yawning Portal",
-        type: "Tavern",
+        type: "Inn, Tavern, Festhall",
         ward: "Castle Ward",
         image: "images/Location_Images/Yawning_Portal.png",
         description: "A famous tavern built atop the entrance to the Undermountain dungeon."
@@ -51,7 +51,7 @@ const activeFilters = {
 
 const searchInput = document.getElementById('search-input');
 const backToTopButton = document.getElementById('back-to-top');
-const locationGrid = document.getElementById('location-grid');
+const locationGrid = document.getElementById('main-content');
 
 searchInput.addEventListener('input', filterLocations);
 
@@ -107,29 +107,81 @@ function filterLocations() {
             locationElement.classList.add('hidden');
         }
     });
+
+    sortLocations();
+}
+
+function sortLocations() {
+    const locationsList = Array.from(locationGrid.children);
+    locationsList.sort((a, b) => {
+        const nameA = a.querySelector('h2').textContent.toLowerCase();
+        const nameB = b.querySelector('h2').textContent.toLowerCase();
+        return nameA.localeCompare(nameB);
+    });
+    locationsList.forEach(location => locationGrid.appendChild(location));
 }
 
 function createLocationTile(location) {
-    const tile = document.createElement('div');
-    tile.className = 'location-tile';
-    tile.id = `location-${location.name.replace(/\s+/g, '-').toLowerCase()}`;
-    tile.innerHTML = `
-        <img src="${location.image}" alt="${location.name}" class="location-img">
+    return `
+    <div class="location-tile" id="location-${location.name.replace(/\s+/g, '-').toLowerCase()}" data-ward="${location.ward}" data-type="${location.type}">
+        <div class="image-container">
+            <img src="placeholder.png" data-src="${location.image}" alt="${location.name}" class="location-img lazy">
+        </div>
         <div class="location-content">
             <h2>${location.name}</h2>
             <p class="location-type">${location.type}</p>
             <p class="location-ward">${location.ward}</p>
             <p class="location-description">${location.description}</p>
         </div>
+    </div>
     `;
-    return tile;
 }
 
 function initializeLocations() {
-    locations.forEach(location => {
-        const tile = createLocationTile(location);
-        locationGrid.appendChild(tile);
-    });
+    locationGrid.innerHTML = locations.map(location => createLocationTile(location)).join('');
+
+    // Lazy loading for images
+    const lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+    
+    if ("IntersectionObserver" in window) {
+        const lazyImageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const lazyImage = entry.target;
+                    lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.classList.remove("lazy");
+                    lazyImageObserver.unobserve(lazyImage);
+                }
+            });
+        });
+
+        lazyImages.forEach(lazyImage => {
+            lazyImageObserver.observe(lazyImage);
+        });
+    } else {
+        // Fallback for browsers that don't support IntersectionObserver
+        lazyImages.forEach(lazyImage => {
+            lazyImage.src = lazyImage.dataset.src;
+            lazyImage.classList.remove("lazy");
+        });
+    }
+
+    sortLocations();
 }
 
 document.addEventListener('DOMContentLoaded', initializeLocations);
+
+document.querySelectorAll('.filter-title').forEach(title => {
+    title.addEventListener('click', () => {
+        const filterSection = title.closest('.filter-section');
+        filterSection.classList.toggle('open');
+        
+        // Animate filter buttons
+        const filterButtons = filterSection.querySelectorAll('.filter-button');
+        filterButtons.forEach((button, index) => {
+            setTimeout(() => {
+                button.style.transform = filterSection.classList.contains('open') ? 'scale(1)' : 'scale(0)';
+            }, index * 50); // Stagger the animation
+        });
+    });
+});
