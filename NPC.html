@@ -41,7 +41,7 @@
         </div>
 
         <div class="filter-section">
-            <h2 class="filter-title">Filter by Faction, Group or Family <span class="arrow">▼</span></h2>
+            <h2 class="filter-title">Filter by Faction or Group <span class="arrow">▼</span></h2>
             <div class="filter-buttons faction-filters">
                 <button class="filter-button" aria-label="Filter by Blackstaff Academy" onclick="toggleFilter('faction', 'Blackstaff Academy')">Blackstaff Academy</button>
                 <button class="filter-button" aria-label="Filter by Bregan D'aerthe" onclick="toggleFilter('faction', 'Bregan Daerthe')">Bregan D'aerthe</button>
@@ -55,6 +55,88 @@
                 <button class="filter-button" aria-label="Filter by Xanathar's Thieves' Guild" onclick="toggleFilter('faction', 'Xanathars Thieves Guild')">Xanathar's Thieves' Guild</button>
             </div>
         </div>
+		
+		<div class="filter-section">
+			<h2 class="filter-title">Filter by Status <span class="arrow">▼</span></h2>
+			<div class="filter-buttons status-filters">
+				<button class="filter-button" aria-label="Filter by Noble" onclick="toggleFilter('status', 'Noble')">Noble</button>
+				<button class="filter-button" aria-label="Filter by Merchant" onclick="toggleFilter('status', 'Merchant')">Merchant</button>
+				<button class="filter-button" aria-label="Filter by City Official" onclick="toggleFilter('status', 'City Official')">City Official</button>
+				<button class="filter-button" aria-label="Filter by Spy" onclick="toggleFilter('status', 'Spy')">Spy</button>
+				<button class="filter-button" aria-label="Filter by Criminal" onclick="toggleFilter('status', 'Criminal')">Criminal</button>
+				<button class="filter-button" aria-label="Filter by Leader" onclick="toggleFilter('status', 'Leader')">Leader</button>
+				<!-- Add more status filters as needed -->
+			</div>
+		</div>
+
+		<div class="filter-section">
+			<h2 class="filter-title">Filter by Race <span class="arrow">▼</span></h2>
+			<div class="filter-buttons race-filters">
+				<button class="filter-button" aria-label="Filter by Aarakocra" onclick="toggleFilter('race', 'Aarakocra')">Aarakocra</button>
+				<button class="filter-button" aria-label="Filter by Aasimar" onclick="toggleFilter('race', 'Aasimar')">Aasimar</button>
+				<button class="filter-button" aria-label="Filter by Abberation" onclick="toggleFilter('race', 'Abberation')">Abberation</button>
+				<button class="filter-button" aria-label="Filter by Aquatic Vedalken" onclick="toggleFilter('race', 'Aquatic Vedalken')">Aquatic Vedalken</button>
+				<button class="filter-button" aria-label="Filter by Astral Vedalken" onclick="toggleFilter('race', 'Astral Vedalken')">Astral Vedalken</button>
+				<button class="filter-button" aria-label="Filter by Beast" onclick="toggleFilter('race', 'Beast')">Beast</button>
+				<button class="filter-button" aria-label="Filter by Beholder" onclick="toggleFilter('race', 'Beholder')">Beholder</button>
+				<button class="filter-button" aria-label="Filter by Bugbear" onclick="toggleFilter('race', 'Bugbear')">Bugbear</button>
+				<button class="filter-button" aria-label="Filter by Centaur" onclick="toggleFilter('race', 'Centaur')">Centaur</button>
+				<button class="filter-button" aria-label="Filter by Changeling" onclick="toggleFilter('race', 'Changeling')">Changeling</button>
+				<button class="filter-button" aria-label="Filter by Construct" onclick="toggleFilter('race', 'Construct')">Construct</button>
+				<button class="filter-button" aria-label="Filter by Deep Gnome" onclick="toggleFilter('race', 'Deep Gnome')">Deep Gnome</button>
+				<button class="filter-button" aria-label="Filter by Devil" onclick="toggleFilter('race', 'Devil')">Devil</button>
+				<button class="filter-button" aria-label="Filter by Dhampir" onclick="toggleFilter('race', 'Dhampir')">Dhampir</button>
+				<button class="filter-button" aria-label="Filter by Dragon" onclick="toggleFilter('race', 'Dragon')">Dragon</button>
+				<button class="filter-button" aria-label="Filter by Dragonborn" onclick="toggleFilter('race', 'Dragonborn')">Dragonborn</button>
+				<button class="filter-button" aria-label="Filter by Drow" onclick="toggleFilter('race', 'Drow')">Drow</button>
+				<button class="filter-button" aria-label="Filter by Duergar" onclick="toggleFilter('race', 'Duergar')">Duergar</button>
+				<button class="filter-button" aria-label="Filter by Dwarf" onclick="toggleFilter('race', 'Dwarf')">Dwarf</button>
+				<button class="filter-button" aria-label="Filter by Eladrin" onclick="toggleFilter('race', 'Eladrin')">Eladrin</button>
+				<button class="filter-button" aria-label="Filter by Elemental" onclick="toggleFilter('race', 'Elemental')">Elemental</button>
+				<button class="filter-button" aria-label="Filter by Elf" onclick="toggleFilter('race', 'Elf')">Elf</button>
+				<button class="filter-button" aria-label="Filter by Fairy" onclick="toggleFilter('race', 'Fairy')">Fairy</button>
+				<button class="filter-button" aria-label="Filter by Fey" onclick="toggleFilter('race', 'Fey')">Fey</button>
+				<button class="filter-button" aria-label="Filter by Firbolg" onclick="toggleFilter('race', 'Firbolg')">Firbolg</button>
+				<button class="filter-button" aria-label="Filter by Gazer" onclick="toggleFilter('race', 'Gazer')">Gazer</button>
+				<button class="filter-button" aria-label="Filter by Genasi" onclick="toggleFilter('race', 'Genasi')">Genasi</button>
+				<button class="filter-button" aria-label="Filter by Githyanki" onclick="toggleFilter('race', 'Githyanki')">Githyanki</button>
+				<button class="filter-button" aria-label="Filter by Githzerai" onclick="toggleFilter('race', 'Githzerai')">Githzerai</button>
+				<button class="filter-button" aria-label="Filter by Gnome" onclick="toggleFilter('race', 'Gnome')">Gnome</button>
+				<button class="filter-button" aria-label="Filter by Goblin" onclick="toggleFilter('race', 'Goblin')">Goblin</button>
+				<button class="filter-button" aria-label="Filter by Goliath" onclick="toggleFilter('race', 'Goliath')">Goliath</button>
+				<button class="filter-button" aria-label="Filter by Grung" onclick="toggleFilter('race', 'Grung')">Grung</button>
+				<button class="filter-button" aria-label="Filter by Half-Elf" onclick="toggleFilter('race', 'Half-Elf')">Half-Elf</button>
+				<button class="filter-button" aria-label="Filter by Halfling" onclick="toggleFilter('race', 'Halfling')">Halfling</button>
+				<button class="filter-button" aria-label="Filter by Half-Orc" onclick="toggleFilter('race', 'Half-Orc')">Half-Orc</button>
+				<button class="filter-button" aria-label="Filter by Harengon" onclick="toggleFilter('race', 'Harengon')">Harengon</button>
+				<button class="filter-button" aria-label="Filter by Hobgoblin" onclick="toggleFilter('race', 'Hobgoblin')">Hobgoblin</button>
+				<button class="filter-button" aria-label="Filter by Human" onclick="toggleFilter('race', 'Human')">Human</button>
+				<button class="filter-button" aria-label="Filter by Kenku" onclick="toggleFilter('race', 'Kenku')">Kenku</button>
+				<button class="filter-button" aria-label="Filter by Kobold" onclick="toggleFilter('race', 'Kobold')">Kobold</button>
+				<button class="filter-button" aria-label="Filter by Lizardfolk" onclick="toggleFilter('race', 'Lizardfolk')">Lizardfolk</button>
+				<button class="filter-button" aria-label="Filter by Locathah" onclick="toggleFilter('race', 'Locathah')">Locathah</button>
+				<button class="filter-button" aria-label="Filter by Loxodon" onclick="toggleFilter('race', 'Loxodon')">Loxodon</button>
+				<button class="filter-button" aria-label="Filter by Minotaur" onclick="toggleFilter('race', 'Minotaur')">Minotaur</button>
+				<button class="filter-button" aria-label="Filter by Monstrosity" onclick="toggleFilter('race', 'Monstrosity')">Monstrosity</button>
+				<button class="filter-button" aria-label="Filter by Ooze" onclick="toggleFilter('race', 'Ooze')">Ooze</button>
+				<button class="filter-button" aria-label="Filter by Orc" onclick="toggleFilter('race', 'Orc')">Orc</button>
+				<button class="filter-button" aria-label="Filter by Owlin" onclick="toggleFilter('race', 'Owlin')">Owlin</button>
+				<button class="filter-button" aria-label="Filter by Plant" onclick="toggleFilter('race', 'Plant')">Plant</button>
+				<button class="filter-button" aria-label="Filter by Satyr" onclick="toggleFilter('race', 'Satyr')">Satyr</button>
+				<button class="filter-button" aria-label="Filter by Sea Elf" onclick="toggleFilter('race', 'Sea Elf')">Sea Elf</button>
+				<button class="filter-button" aria-label="Filter by Shadar-Kai" onclick="toggleFilter('race', 'Shadar-Kai')">Shadar-Kai</button>
+				<button class="filter-button" aria-label="Filter by Shifter" onclick="toggleFilter('race', 'Shifter')">Shifter</button>
+				<button class="filter-button" aria-label="Filter by Tabaxi" onclick="toggleFilter('race', 'Tabaxi')">Tabaxi</button>
+				<button class="filter-button" aria-label="Filter by Tiefling" onclick="toggleFilter('race', 'Tiefling')">Tiefling</button>
+				<button class="filter-button" aria-label="Filter by Tortle" onclick="toggleFilter('race', 'Tortle')">Tortle</button>
+				<button class="filter-button" aria-label="Filter by Triton" onclick="toggleFilter('race', 'Triton')">Triton</button>
+				<button class="filter-button" aria-label="Filter by Undead" onclick="toggleFilter('race', 'Undead')">Undead</button>
+				<button class="filter-button" aria-label="Filter by Vampire" onclick="toggleFilter('race', 'Vampire')">Vampire</button>
+				<button class="filter-button" aria-label="Filter by Yuan-Ti" onclick="toggleFilter('race', 'Yuan-Ti')">Yuan-Ti</button>
+			</div>
+		</div>
+
+
         
         <div class="search-container">
             <input type="text" id="search-input" aria-label="Search NPCs" placeholder="Search NPCs...">

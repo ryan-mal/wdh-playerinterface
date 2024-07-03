@@ -2,53 +2,65 @@ const npcs = [
     {
         name: "Vajra Safahr",
         title: "Blackstaff",
-        ward: "Castle Ward",
+        wards: ["Castle Ward"],
         factions: ["Grey Hands", "Blackstaff Academy"],
+        status: ["City Official", "Leader"],
+        race: ["Human"],
         image: "images/NPC_Images/Vajra_Safahr.png",
         description: "The Seventh Blackstaff, archmage of Waterdeep, and leader of the Grey Hands and Blackstaff Academy.",
-        status: "alive"
+        isAlive: true
     },
     {
         name: "Davil Starsong",
         title: "",
-        ward: "Dock Ward",
+        wards: ["Dock Ward"],
         factions: ["Doom Raider Zhentarim"],
+        status: [],
+        race: ["Elf"],
         image: "images/NPC_Images/Davil_Starsong.png",
         description: "A charismatic elven bard who serves as a public face for the Doom Raider Zhentarim splinter group in Waterdeep.",
-		status: "alive"
+        isAlive: true
     },
     {
         name: "Laeral Silverhand",
         title: "Open Lord",
-        ward: "Castle Ward",
+        wards: ["Castle Ward"],
         factions: ["Lords Alliance"],
+        status: ["City Official"],
+        race: ["Elf"],
         image: "images/NPC_Images/Laeral_Silverhand.png",
         description: "The Open Lord of Waterdeep, a powerful mage and diplomat who governs the city.",
-		status: "alive"
+        isAlive: true
     },
     {
         name: "Mirt",
         title: "High Harper",
-        ward: "Castle Ward",
+        wards: ["Castle Ward"],
         factions: ["Harpers"],
+        status: ["Spy", "Leader"],
+        race: ["Human"],
         image: "images/NPC_Images/Mirt.png",
         description: "The Leader of the Waterdeep Harper Sect.",
-		status: "alive"
+        isAlive: true
     },
     {
         name: "Xanathar",
         title: "Don",
-        ward: "Undermountain/Skullport",
+        wards: ["Undermountain/Skullport"],
         factions: ["Xanathars Thieves Guild"],
+        status: ["Criminal", "Leader"],
+        race: ["Beholder"],
         image: "images/NPC_Images/Xanathar.png",
         description: "The Leader of the underground thieves guild.",
-		status: "alive"
+        isAlive: true
     }
 ];
 
 const activeFilters = {
     ward: new Set(),
-    faction: new Set()
+    faction: new Set(),
+    status: new Set(),
+    race: new Set()
 };
 
 const searchInput = document.getElementById('search-input');
@@ -68,15 +80,7 @@ backToTopButton.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// Add event listeners for collapsible sections
-document.querySelectorAll('.filter-section h2').forEach(header => {
-    header.addEventListener('click', () => {
-        const filterButtons = header.nextElementSibling;
-        filterButtons.classList.toggle('show');
-        const toggleButton = header.querySelector('.toggle-filters');
-        toggleButton.textContent = filterButtons.classList.contains('show') ? '▲' : '▼';
-    });
-});
+
 
 function toggleFilter(filterType, value) {
     const button = document.querySelector(`button[onclick="toggleFilter('${filterType}', '${value}')"]`);
@@ -98,6 +102,8 @@ function showAll() {
 function clearFilters() {
     activeFilters.ward.clear();
     activeFilters.faction.clear();
+    activeFilters.status.clear();
+    activeFilters.race.clear();
     document.querySelectorAll('.filter-button').forEach(button => {
         button.classList.remove('active');
     });
@@ -106,26 +112,57 @@ function clearFilters() {
 
 function filterNPCs() {
     const searchTerm = searchInput.value.toLowerCase();
-    const npcs = document.querySelectorAll('.npc-item');
-    npcs.forEach(npc => {
-        const title = npc.querySelector('.npc-title').textContent.toLowerCase();
-        const name = npc.querySelector('h2').textContent.toLowerCase();
-        const ward = npc.getAttribute('data-ward');
-        const factions = npc.getAttribute('data-faction').split(',');
+    const filteredNPCs = npcs.filter(npc => {
+        const matchesSearch = npc.name.toLowerCase().includes(searchTerm) || npc.description.toLowerCase().includes(searchTerm);
+        const matchesWard = activeFilters.ward.size === 0 || npc.wards.some(ward => activeFilters.ward.has(ward));
+        const matchesFaction = activeFilters.faction.size === 0 || npc.factions.some(faction => activeFilters.faction.has(faction));
+        const matchesStatus = activeFilters.status.size === 0 || npc.status.some(status => activeFilters.status.has(status));
+        const matchesRace = activeFilters.race.size === 0 || npc.race.some(race => activeFilters.race.has(race));
         
-        const matchesSearch = title.includes(searchTerm) || name.includes(searchTerm);
-        const matchesWard = activeFilters.ward.size === 0 || activeFilters.ward.has(ward);
-        const matchesFaction = activeFilters.faction.size === 0 || factions.some(faction => activeFilters.faction.has(faction));
-        
-        if (matchesSearch && matchesWard && matchesFaction) {
-            npc.classList.remove('hidden');
-        } else {
-            npc.classList.add('hidden');
-        }
+        return matchesSearch && matchesWard && matchesFaction && matchesStatus && matchesRace;
     });
 
-    sortNPCs(); // Sort NPCs after filtering
+    displayNPCs(filteredNPCs);
 }
+
+function displayNPCs(filteredNPCs) {
+    const npcList = document.getElementById('main-content');
+    npcList.innerHTML = filteredNPCs.map(npc => createNPCCard(npc)).join('');
+    sortNPCs();
+    initializeLazyLoading(); // Add this line to reinitialize lazy loading
+}
+
+function initializeLazyLoading() {
+    const lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+    
+    if ("IntersectionObserver" in window) {
+        const lazyImageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const lazyImage = entry.target;
+                    lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.classList.remove("lazy");
+                    lazyImageObserver.unobserve(lazyImage);
+                }
+            });
+        });
+
+        lazyImages.forEach(lazyImage => {
+            lazyImageObserver.observe(lazyImage);
+        });
+    } else {
+        // Fallback for browsers that don't support IntersectionObserver
+        lazyImages.forEach(lazyImage => {
+            lazyImage.src = lazyImage.dataset.src;
+            lazyImage.classList.remove("lazy");
+        });
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    filterNPCs(); // This will display all NPCs initially
+    initializeLazyLoading(); // Initialize lazy loading for the initial display
+});
 
 function sortNPCs() {
     const npcList = document.getElementById('main-content');
@@ -142,16 +179,24 @@ function sortNPCs() {
 
 function createNPCCard(npc) {
     return `
-    <div class="npc-item ${npc.status}" data-ward="${npc.ward}" data-faction="${npc.factions.join(',')}">
+    <div class="npc-item ${npc.isAlive ? 'alive' : 'dead'}" 
+         data-wards="${npc.wards.join(',')}" 
+         data-factions="${npc.factions.join(',')}"
+         data-status="${npc.status.join(',')}"
+         data-race="${npc.race.join(',')}">
         <div class="image-container">
             <img src="placeholder.png" data-src="${npc.image}" alt="${npc.name}" class="profile-img lazy">
-            ${npc.status === 'dead' ? '<div class="status-overlay">Deceased</div>' : ''}
+            ${!npc.isAlive ? '<div class="status-overlay">Deceased</div>' : ''}
         </div>
         <div class="npc-content">
             <p class="npc-title">${npc.title || ''}</p>
             <h2>${npc.name}</h2>
-            <p class="ward-tag">${npc.ward}</p>
-            ${npc.factions.map(faction => `<p class="faction-tag" title="${faction}">${faction}</p>`).join('')}
+            <div class="tags-container">
+                ${npc.wards.map(ward => `<span class="tag ward-tag" title="Ward">${ward}</span>`).join('')}
+                ${npc.factions.map(faction => `<span class="tag faction-tag" title="Faction">${faction}</span>`).join('')}
+                ${npc.status.map(status => `<span class="tag status-tag" title="Status">${status}</span>`).join('')}
+                ${npc.race.map(race => `<span class="tag race-tag" title="Race">${race}</span>`).join('')}
+            </div>
             <p class="description">${npc.description}</p>
         </div>
     </div>
@@ -159,9 +204,7 @@ function createNPCCard(npc) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Populate NPC list
-    const npcList = document.getElementById('main-content');
-    npcList.innerHTML = npcs.map(npc => createNPCCard(npc)).join('');
+    filterNPCs(); // This will display all NPCs initially
 
     // Lazy loading for images
     const lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
@@ -188,8 +231,6 @@ document.addEventListener("DOMContentLoaded", () => {
             lazyImage.classList.remove("lazy");
         });
     }
-
-    sortNPCs(); // Sort NPCs on initial load
 });
 
 document.querySelectorAll('.filter-title').forEach(title => {
