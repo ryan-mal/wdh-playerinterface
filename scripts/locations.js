@@ -3,22 +3,22 @@ const locations = [
         name: "The Yawning Portal",
         type: "Tavern",
         ward: "Castle Ward",
-        image: "images/Location_Images/yawning_portal.png",
+        image: "images/Location_Images/Yawning_Portal.png",
         description: "A famous tavern built atop the entrance to the Undermountain dungeon."
     },
     {
         name: "Blackstaff Tower",
         type: "Landmark",
         ward: "Castle Ward",
-        image: "images/Location_Images/blackstaff_tower.png",
+        image: "images/Location_Images/Blackstaff_Tower.png",
         description: "Home and workplace of Waterdeep's archmage, shrouded in magical mystery."
     },
     {
-        name: "Temple of Gond",
+        name: "House of Inspired Hands",
         type: "Temple",
         ward: "Trades Ward",
-        image: "images/Location_Images/temple_of_gond.png",
-        description: "A temple dedicated to the god of craft and innovation."
+        image: "images/Location_Images/House_of_Inspired_Hands.png",
+        description: "A temple dedicated to Gond, the god of craft and innovation."
     },
     {
         name: "The Bent Nail",
@@ -31,10 +31,17 @@ const locations = [
         name: "Trollskull Manor",
         type: "Landmark",
         ward: "North Ward",
-        image: "images/Location_Images/trollskull_manor.png",
+        image: "images/Location_Images/Trollskull_Manor.png",
         description: "An old, possibly haunted manor with a storied history."
     },
-    // Add more locations as needed
+	    {
+        name: "Archway Commons",
+        type: "Landmark",
+        ward: "Castle Ward",
+        image: "images/Location_Images/Archway_Commons.png",
+        description: "A common park usually for students of Blackstaff Academy."
+    }
+    // Add more locations as needed. Remember, they must all end with a , other then the last entry
 ];
 
 const activeFilters = {
