@@ -135,7 +135,7 @@ nav ul li a:hover {
 .description {
     font-size: 0.9rem;
     color: #b0b0b0;
-    margin-top: auto;
+    /* margin-top: auto; */
 }
 
 /* Update your existing tag styles */
@@ -156,7 +156,7 @@ nav ul li a:hover {
 .race-tag { background-color: #16a085; }
 
 .tag.active {
-    color: #ffd700;
+    /* color: #ffd700; */
     text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700;
     box-shadow: 0 0 5px rgba(255, 215, 0, 0.5), 0 0 10px rgba(255, 215, 0, 0.3);
     animation: noir-pulse 1.5s infinite alternate;
@@ -527,6 +527,39 @@ footer {
     color: #cccccc;
     line-height: 1.4;
 }
+
+/* Modal tag styles */
+.modal .tag {
+    font-size: 0.8rem; /* Slightly larger for better visibility in the modal */
+    margin: 0.2rem;
+    cursor: pointer;
+}
+
+.modal .tag.active {
+    /* color: #ffd700; */
+    text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5), 0 0 10px rgba(255, 215, 0, 0.3);
+    animation: noir-pulse 1.5s infinite alternate;
+}
+
+.modal .tag.active::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, rgba(255,215,0,0) 70%);
+    opacity: 0;
+    animation: noir-glow 3s infinite;
+}
+
+.modal .tag:hover {
+    color: #ffffff;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
 
 /* Responsive styles */
 @media (max-width: 600px) {

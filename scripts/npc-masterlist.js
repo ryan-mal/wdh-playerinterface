@@ -36,7 +36,7 @@ window.addEventListener('scroll', handleScroll);
 backToTopButton.addEventListener('click', scrollToTop);
 filterToggle.addEventListener('click', toggleFilterDropdown);
 
-function toggleFilter(filterType, value) {
+function toggleFilter(filterType, value, keepDropdownClosed = false) {
     const button = document.querySelector(`button[onclick="toggleFilter('${filterType}', '${value}')"]`);
     if (activeFilters[filterType].has(value)) {
         activeFilters[filterType].delete(value);
@@ -48,6 +48,7 @@ function toggleFilter(filterType, value) {
 	
 	filterNPCs();
     highlightActiveTags();
+	updateModalTags();
 }
 
 function highlightActiveTags() {
@@ -151,6 +152,7 @@ function toggleTagFilter(event, filterType, value) {
     }
 }
 
+// Modify the openModal function
 function openModal(npcId) {
     const modal = document.getElementById('npc-modal');
     const modalContent = document.getElementById('modal-npc-content');
@@ -160,6 +162,32 @@ function openModal(npcId) {
         modalContent.innerHTML = createModalContent(npc);
         modal.style.display = 'block';
         window.location.hash = npcId;
+        
+        // Add event listeners to modal tags
+        modalContent.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', (event) => {
+                const type = tag.classList[1].split('-')[0];
+                const value = tag.textContent;
+                toggleTagFilter(event, type, value);
+                updateModalTags();
+            });
+        });
+    }
+}
+
+// Add this new function
+function updateModalTags() {
+    const modalContent = document.getElementById('modal-npc-content');
+    if (modalContent) {
+        modalContent.querySelectorAll('.tag').forEach(tag => {
+            const type = tag.classList[1].split('-')[0];
+            const value = tag.textContent;
+            if (activeFilters[type].has(value)) {
+                tag.classList.add('active');
+            } else {
+                tag.classList.remove('active');
+            }
+        });
     }
 }
 
@@ -175,10 +203,10 @@ function createModalContent(npc) {
             <img src="${image}" alt="${name}" class="modal-img">
             <div class="modal-info">
                 <div class="tags-container">
-                    ${createTags(wards, 'ward')}
-                    ${createTags(factions, 'faction')}
-                    ${createTags(status, 'status')}
-                    ${createTags(race, 'race')}
+                    ${createModalTags(wards, 'ward')}
+                    ${createModalTags(factions, 'faction')}
+                    ${createModalTags(status, 'status')}
+                    ${createModalTags(race, 'race')}
                 </div>
                 <p class="modal-description">${description}</p>
                 ${notableInfo ? `
@@ -191,6 +219,15 @@ function createModalContent(npc) {
         </div>
     `;
 }
+
+// Add this new function
+function createModalTags(items, type) {
+    return items.map(item => {
+        const isActive = activeFilters[type].has(item);
+        return `<span class="tag ${type}-tag${isActive ? ' active' : ''}" title="${type.charAt(0).toUpperCase() + type.slice(1)}">${item}</span>`;
+    }).join('');
+}
+
 
 function handleScroll() {
     backToTopButton.style.display = window.pageYOffset > 300 ? 'block' : 'none';
@@ -236,7 +273,6 @@ function initializeLazyLoading() {
 document.addEventListener("DOMContentLoaded", () => {
     displayNPCs(npcs);
     initializeLazyLoading();
-    highlightActiveTags();
 
     document.querySelectorAll('.filter-title').forEach(title => {
         title.addEventListener('click', () => {
