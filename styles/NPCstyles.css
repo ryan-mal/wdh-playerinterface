@@ -138,6 +138,73 @@ nav ul li a:hover {
     margin-top: auto;
 }
 
+/* Update your existing tag styles */
+.tag {
+    font-size: 0.7rem;
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+    color: #ecf0f1;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.ward-tag { background-color: #7A3020; }
+.faction-tag { background-color: #34495e; }
+.status-tag { background-color: #8e44ad; }
+.race-tag { background-color: #16a085; }
+
+.tag.active {
+    color: #ffd700;
+    text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5), 0 0 10px rgba(255, 215, 0, 0.3);
+    animation: noir-pulse 1.5s infinite alternate;
+}
+
+.tag.active::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, rgba(255,215,0,0) 70%);
+    opacity: 0;
+    animation: noir-glow 3s infinite;
+}
+
+@keyframes noir-pulse {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes noir-glow {
+    0% {
+        opacity: 0;
+        transform: translate(25%, 25%) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-25%, -25%) rotate(360deg);
+    }
+}
+
+/* Hover effect for all tags */
+.tag:hover {
+    color: #ffffff;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+
 /* Filter styles */
 .filter-container {
     margin-bottom: 2rem;

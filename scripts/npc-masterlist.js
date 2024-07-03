@@ -45,12 +45,27 @@ function toggleFilter(filterType, value) {
         activeFilters[filterType].add(value);
         button.classList.add('active');
     }
-    filterNPCs();
+	
+	filterNPCs();
+    highlightActiveTags();
+}
+
+function highlightActiveTags() {
+    document.querySelectorAll('.tag').forEach(tag => {
+        const type = tag.classList[1].split('-')[0]; // e.g., "ward" from "ward-tag"
+        const value = tag.textContent;
+        if (activeFilters[type].has(value)) {
+            tag.classList.add('active');
+        } else {
+            tag.classList.remove('active');
+        }
+    });
 }
 
 function showAll() {
     clearFilters();
     filterNPCs();
+    highlightActiveTags();
 }
 
 function clearFilters() {
@@ -85,6 +100,7 @@ function filterNPCs() {
 function displayNPCs(filteredNPCs) {
     npcList.innerHTML = filteredNPCs.map(npc => createNPCCard(npc)).join('');
     sortNPCs();
+    highlightActiveTags();
 }
 
 function sortNPCs() {
@@ -124,7 +140,15 @@ function createNPCCard(npc) {
 }
 
 function createTags(items, type) {
-    return items.map(item => `<span class="tag ${type}-tag" title="${type.charAt(0).toUpperCase() + type.slice(1)}">${item}</span>`).join('');
+    return items.map(item => `<span class="tag ${type}-tag" title="${type.charAt(0).toUpperCase() + type.slice(1)}" onclick="toggleTagFilter(event, '${type}', '${item}')">${item}</span>`).join('');
+}
+
+function toggleTagFilter(event, filterType, value) {
+    event.stopPropagation(); // Prevent the NPC card click event from firing
+    const button = document.querySelector(`button[onclick="toggleFilter('${filterType}', '${value}')"]`);
+    if (button) {
+        button.click(); // Simulate a click on the filter button
+    }
 }
 
 function openModal(npcId) {
@@ -212,6 +236,7 @@ function initializeLazyLoading() {
 document.addEventListener("DOMContentLoaded", () => {
     displayNPCs(npcs);
     initializeLazyLoading();
+    highlightActiveTags();
 
     document.querySelectorAll('.filter-title').forEach(title => {
         title.addEventListener('click', () => {
