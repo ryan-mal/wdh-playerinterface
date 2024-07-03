@@ -29,12 +29,27 @@ const backToTopButton = document.getElementById('back-to-top');
 const filterToggle = document.getElementById('filter-toggle');
 const filterDropdown = document.getElementById('filter-dropdown');
 const npcList = document.getElementById('main-content');
+const sortToggle = document.querySelector('.sort-toggle');
+const sortButtonsContainer = document.querySelector('.sort-buttons');
+const sortButtons = document.querySelectorAll('.sort-button');
+
 
 // Event listeners
 searchInput.addEventListener('input', filterNPCs);
 window.addEventListener('scroll', handleScroll);
 backToTopButton.addEventListener('click', scrollToTop);
 filterToggle.addEventListener('click', toggleFilterDropdown);
+sortToggle.addEventListener('click', toggleSortButtons);
+sortButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        sortButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        sortNPCs(button.dataset.sort);
+        toggleSortButtons(); // Close the sort buttons after selection
+    });
+});
+
+
 
 function toggleFilter(filterType, value, keepDropdownClosed = false) {
     const button = document.querySelector(`button[onclick="toggleFilter('${filterType}', '${value}')"]`);
@@ -100,27 +115,42 @@ function filterNPCs() {
 
 function displayNPCs(filteredNPCs) {
     npcList.innerHTML = filteredNPCs.map(npc => createNPCCard(npc)).join('');
-    sortNPCs();
+    sortNPCs(document.querySelector('.sort-button.active').dataset.sort);
     highlightActiveTags();
 }
 
-function sortNPCs() {
-    const npcs = Array.from(npcList.children);
-    npcs.sort((a, b) => a.querySelector('h2').textContent.localeCompare(b.querySelector('h2').textContent));
-    npcs.forEach(npc => npcList.appendChild(npc));
+function toggleSortButtons() {
+    sortButtonsContainer.classList.toggle('open');
+    sortToggle.textContent = sortButtonsContainer.classList.contains('open') ? 'Sort ⏴' : 'Sort ⏵';
 }
 
+function sortNPCs(sortBy) {
+    const npcs = Array.from(npcList.children);
+
+    npcs.sort((a, b) => {
+        if (sortBy === 'name') {
+            return a.querySelector('h2').textContent.localeCompare(b.querySelector('h2').textContent);
+        } else {
+            const aValues = a.getAttribute(`data-${sortBy}`).split(',');
+            const bValues = b.getAttribute(`data-${sortBy}`).split(',');
+            return (aValues[0] || '').localeCompare(bValues[0] || '');
+        }
+    });
+
+    npcs.forEach(npc => npcList.appendChild(npc));
+}
 function createNPCCard(npc) {
-    const { name, title, wards, factions, status, race, image, description, isAlive } = npc;
-    const npcId = name.replace(/\s+/g, '-').toLowerCase();
-    
-    return `
-    <div class="npc-item ${isAlive ? 'alive' : 'dead'}" 
-         data-wards="${wards.join(',')}" 
-         data-factions="${factions.join(',')}"
-         data-status="${status.join(',')}"
-         data-race="${race.join(',')}"
-         onclick="openModal('${npcId}')">
+  const { name, title, wards, factions, status, race, image, description, isAlive } = npc;
+  const npcId = name.replace(/\s+/g, '-').toLowerCase();
+  
+  return `
+  <div class="npc-item ${isAlive ? 'alive' : 'dead'}" 
+       data-name="${name}"
+       data-ward="${wards.join(',')}" 
+       data-faction="${factions.join(',')}"
+       data-status="${status.join(',')}"
+       data-race="${race.join(',')}"
+       onclick="openModal('${npcId}')">
         <div class="image-container">
             <img src="${image}" alt="${name}" class="profile-img">
             ${!isAlive ? '<div class="status-overlay">Deceased</div>' : ''}
@@ -175,7 +205,6 @@ function openModal(npcId) {
     }
 }
 
-// Add this new function
 function updateModalTags() {
     const modalContent = document.getElementById('modal-npc-content');
     if (modalContent) {
@@ -220,7 +249,6 @@ function createModalContent(npc) {
     `;
 }
 
-// Add this new function
 function createModalTags(items, type) {
     return items.map(item => {
         const isActive = activeFilters[type].has(item);

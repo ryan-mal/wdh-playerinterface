@@ -139,7 +139,6 @@
 					<button class="filter-button" aria-label="Filter by Yuan-Ti" onclick="toggleFilter('race', 'Yuan-Ti')">Yuan-Ti</button>
 				</div>
 			</div>
-
         </div>
         
         <div class="search-and-actions">
@@ -150,19 +149,30 @@
                 <button class="global-button" onclick="showAll()">Show All</button>
             </div>
         </div>
+
+		<div class="sort-container">
+			<button class="sort-toggle">Sort ⏵</button>
+			<div class="sort-buttons">
+				<button class="sort-button active" data-sort="name">Name</button>
+				<button class="sort-button" data-sort="ward">Ward</button>
+				<button class="sort-button" data-sort="faction">Faction</button>
+				<button class="sort-button" data-sort="status">Status</button>
+				<button class="sort-button" data-sort="race">Race</button>
+			</div>
+		</div>
     </div>
 
     <main id="main-content" class="grid-container">
+        <!-- NPC cards will be dynamically inserted here -->
     </main>
     
-	<div id="npc-modal" class="modal">
-		<div class="modal-content">
-			<span class="close">&times;</span>
-			<div id="modal-npc-content"></div>
-		</div>
-	</div>
-	
-	
+    <div id="npc-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-npc-content"></div>
+        </div>
+    </div>
+    
     <footer>
         <p>&copy; 2024 Waterdeep: Dragon Heist Campaign. All rights reserved.</p>
     </footer>
@@ -170,6 +180,6 @@
     <button id="back-to-top" aria-label="Back to top">↑</button>
 
     <script src="data/npc-data.js"></script>
-	<script src="scripts/npc-masterlist.js"></script>
+    <script src="scripts/npc-masterlist.js"></script>
 </body>
 </html>
