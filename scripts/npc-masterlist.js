@@ -23,7 +23,6 @@ const npcs = [
         image: "images/NPC_Images/Laeral_Silverhand.png",
         description: "The Open Lord of Waterdeep, a powerful mage and diplomat who governs the city."
     },
-	
     {
         name: "Mirt",
         title: "High Harper",
@@ -32,7 +31,6 @@ const npcs = [
         image: "images/NPC_Images/Mirt.png",
         description: "The Leader of the Waterdeep Harper Sect."
     },
-
     {
         name: "Xanathar",
         title: "Don",
@@ -41,7 +39,6 @@ const npcs = [
         image: "images/NPC_Images/Xanathar.png",
         description: "The Leader of the underground thieves guild."
     }
-
 ];
 
 const activeFilters = {
@@ -64,6 +61,16 @@ window.addEventListener('scroll', () => {
 
 backToTopButton.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Add event listeners for collapsible sections
+document.querySelectorAll('.filter-section h2').forEach(header => {
+    header.addEventListener('click', () => {
+        const filterButtons = header.nextElementSibling;
+        filterButtons.classList.toggle('show');
+        const toggleButton = header.querySelector('.toggle-filters');
+        toggleButton.textContent = filterButtons.classList.contains('show') ? '▲' : '▼';
+    });
 });
 
 function toggleFilter(filterType, value) {
@@ -98,11 +105,9 @@ function filterNPCs() {
     npcs.forEach(npc => {
         const title = npc.querySelector('.npc-title').textContent.toLowerCase();
         const name = npc.querySelector('h2').textContent.toLowerCase();
-        // const description = npc.querySelector('.description').textContent.toLowerCase();
         const location = npc.getAttribute('data-location');
         const factions = npc.getAttribute('data-faction').split(',');
         
-        //const matchesSearch = title.includes(searchTerm) || name.includes(searchTerm) || description.includes(searchTerm);
         const matchesSearch = title.includes(searchTerm) || name.includes(searchTerm);
         const matchesLocation = activeFilters.location.size === 0 || activeFilters.location.has(location);
         const matchesFaction = activeFilters.faction.size === 0 || factions.some(faction => activeFilters.faction.has(faction));
@@ -145,7 +150,6 @@ function createNPCCard(npc) {
     `;
 }
 
-// Lazy loading for images
 document.addEventListener("DOMContentLoaded", () => {
     // Populate NPC list
     const npcList = document.getElementById('main-content');
@@ -178,4 +182,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     sortNPCs(); // Sort NPCs on initial load
+});
+
+document.querySelectorAll('.filter-title').forEach(title => {
+    title.addEventListener('click', () => {
+        const filterSection = title.closest('.filter-section');
+        filterSection.classList.toggle('open');
+        
+        // Animate filter buttons
+        const filterButtons = filterSection.querySelectorAll('.filter-button');
+        filterButtons.forEach((button, index) => {
+            setTimeout(() => {
+                button.style.transform = filterSection.classList.contains('open') ? 'scale(1)' : 'scale(0)';
+            }, index * 50); // Stagger the animation
+        });
+    });
 });

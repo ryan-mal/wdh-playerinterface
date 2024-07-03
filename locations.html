@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waterdeep: Dragon Heist - Locations</title>
+    <link rel="stylesheet" href="styles/location-styles.css">
+</head>
+<body>
+    <header>
+        <h1>Waterdeep: Dragon Heist</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#characters">Characters</a></li>
+                <li><a href="#map">City Map</a></li>
+                <li><a href="locations.html">Locations</a></li>
+				<li><a href="NPC.html">NPCs</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="filter-container">
+            <h2>Filter by Ward</h2>
+            <div class="filter-buttons">
+                <button class="filter-button" onclick="toggleFilter('ward', 'Castle Ward')">Castle Ward</button>
+                <button class="filter-button" onclick="toggleFilter('ward', 'Dock Ward')">Dock Ward</button>
+                <button class="filter-button" onclick="toggleFilter('ward', 'Field Ward')">Field Ward</button>
+                <button class="filter-button" onclick="toggleFilter('ward', 'North Ward')">North Ward</button>
+                <button class="filter-button" onclick="toggleFilter('ward', 'Sea Ward')">Sea Ward</button>
+                <button class="filter-button" onclick="toggleFilter('ward', 'Southern Ward')">Southern Ward</button>
+                <button class="filter-button" onclick="toggleFilter('ward', 'Trades Ward')">Trades Ward</button>
+            </div>
+
+            <h2>Filter by Type</h2>
+            <div class="filter-buttons">
+                <button class="filter-button" onclick="toggleFilter('type', 'Temple')">Temples</button>
+                <button class="filter-button" onclick="toggleFilter('type', 'Blacksmith')">Blacksmiths</button>
+                <button class="filter-button" onclick="toggleFilter('type', 'Tavern')">Taverns</button>
+                <button class="filter-button" onclick="toggleFilter('type', 'Shop')">Shops</button>
+                <button class="filter-button" onclick="toggleFilter('type', 'Landmark')">Landmarks</button>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search locations...">
+            </div>
+
+            <button class="filter-button" onclick="showAll()">Show All</button>
+            <button class="filter-button" onclick="clearFilters()">Clear Filters</button>
+        </div>
+
+        <div id="location-grid" class="grid-container">
+            <!-- Location tiles will be dynamically inserted here -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Waterdeep: Dragon Heist Campaign. All rights reserved.</p>
+    </footer>
+
+    <button id="back-to-top" aria-label="Back to top">↑</button>
+
+    <script src="scripts/locations.js"></script>
+</body>
+</html>
