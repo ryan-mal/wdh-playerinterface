@@ -3,7 +3,7 @@ const locations = [
         name: "The Yawning Portal",
         ward: "Castle Ward",
         type: ["Inn, Tavern, Festhall"],
-        image: "images/Location_Images/yawning_portal.png",
+        image: "images/Location_Images/Yawning_Portal.png",
         description: "Famous tavern built atop the entrance to Undermountain.",
         notableInfo: "Owned by Durnan, a retired adventurer. Features a large well leading to Undermountain."
     },
