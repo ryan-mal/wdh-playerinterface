@@ -11,9 +11,9 @@
         <h1>Waterdeep: Dragon Heist</h1>
         <nav>
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#characters">Characters</a></li>
-                <li><a href="#map">City Map</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#characters">Characters</a></li>
+                <li><a href="index.html#map">City Map</a></li>
                 <li><a href="locations.html">Locations</a></li>
                 <li><a href="NPC.html">NPCs</a></li> 
             </ul>
@@ -41,7 +41,7 @@
         </div>
 
         <div class="filter-section">
-            <h2 class="filter-title">Filter by Faction <span class="arrow">▼</span></h2>
+            <h2 class="filter-title">Filter by Faction, Group or Family <span class="arrow">▼</span></h2>
             <div class="filter-buttons faction-filters">
                 <button class="filter-button" aria-label="Filter by Blackstaff Academy" onclick="toggleFilter('faction', 'Blackstaff Academy')">Blackstaff Academy</button>
                 <button class="filter-button" aria-label="Filter by Bregan D'aerthe" onclick="toggleFilter('faction', 'Bregan Daerthe')">Bregan D'aerthe</button>
@@ -60,10 +60,11 @@
             <input type="text" id="search-input" aria-label="Search NPCs" placeholder="Search NPCs...">
         </div>
         
-        <button class="filter-button" onclick="showAll()">Show All</button>
-        <button class="filter-button" onclick="clearFilters()">Clear Filters</button>
-    </div>
-
+		<div class="global-actions">
+			<button class="global-button" onclick="showAll()">Show All</button>
+			<!-- <button class="global-button" onclick="clearFilters()">Clear Filters</button> -->
+		</div>
+	</div>
     <main id="main-content" class="grid-container">
     </main>
     

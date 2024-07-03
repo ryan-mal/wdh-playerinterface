@@ -5,23 +5,26 @@ const npcs = [
         location: "Castle Ward",
         factions: ["Grey Hands", "Blackstaff Academy"],
         image: "images/NPC_Images/Vajra_Safahr.png",
-        description: "The Seventh Blackstaff, archmage of Waterdeep, and leader of the Grey Hands and Blackstaff Academy."
+        description: "The Seventh Blackstaff, archmage of Waterdeep, and leader of the Grey Hands and Blackstaff Academy.",
+        status: "dead"
     },
     {
         name: "Davil Starsong",
         title: "",
         location: "Dock Ward",
-        factions: ["Zhentarim (DR)"],
+        factions: ["Doom Raider Zhentarim"],
         image: "images/NPC_Images/Davil_Starsong.png",
-        description: "A charismatic elven bard who serves as a public face for the Doom Raider Zhentarim splinter group in Waterdeep."
+        description: "A charismatic elven bard who serves as a public face for the Doom Raider Zhentarim splinter group in Waterdeep.",
+		status: "alive"
     },
     {
         name: "Laeral Silverhand",
         title: "Open Lord",
         location: "Castle Ward",
-        factions: ["Lord's Alliance"],
+        factions: ["Lords Alliance"],
         image: "images/NPC_Images/Laeral_Silverhand.png",
-        description: "The Open Lord of Waterdeep, a powerful mage and diplomat who governs the city."
+        description: "The Open Lord of Waterdeep, a powerful mage and diplomat who governs the city.",
+		status: "alive"
     },
     {
         name: "Mirt",
@@ -29,15 +32,17 @@ const npcs = [
         location: "Castle Ward",
         factions: ["Harpers"],
         image: "images/NPC_Images/Mirt.png",
-        description: "The Leader of the Waterdeep Harper Sect."
+        description: "The Leader of the Waterdeep Harper Sect.",
+		status: "alive"
     },
     {
         name: "Xanathar",
         title: "Don",
         location: "Undermountain/Skullport",
-        factions: ["Xanathars Thieves Guild"],
+        factions: ["Xanathar's Thieves' Guild"],
         image: "images/NPC_Images/Xanathar.png",
-        description: "The Leader of the underground thieves guild."
+        description: "The Leader of the underground thieves guild.",
+		status: "alive"
     }
 ];
 
@@ -137,8 +142,11 @@ function sortNPCs() {
 
 function createNPCCard(npc) {
     return `
-    <div class="npc-item" data-location="${npc.location}" data-faction="${npc.factions.join(',')}">
-        <img src="placeholder.png" data-src="${npc.image}" alt="${npc.name}" class="profile-img lazy">
+    <div class="npc-item ${npc.status}" data-location="${npc.location}" data-faction="${npc.factions.join(',')}">
+        <div class="image-container">
+            <img src="placeholder.png" data-src="${npc.image}" alt="${npc.name}" class="profile-img lazy">
+            ${npc.status === 'dead' ? '<div class="status-overlay">Deceased</div>' : ''}
+        </div>
         <div class="npc-content">
             <p class="npc-title">${npc.title || ''}</p>
             <h2>${npc.name}</h2>
