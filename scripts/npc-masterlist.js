@@ -65,6 +65,8 @@ const activeFilters = {
 
 const searchInput = document.getElementById('search-input');
 const backToTopButton = document.getElementById('back-to-top');
+const filterToggle = document.getElementById('filter-toggle');
+const filterDropdown = document.getElementById('filter-dropdown');
 
 searchInput.addEventListener('input', filterNPCs);
 
@@ -78,6 +80,11 @@ window.addEventListener('scroll', () => {
 
 backToTopButton.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+filterToggle.addEventListener('click', () => {
+    filterDropdown.classList.toggle('open');
+    filterToggle.textContent = filterDropdown.classList.contains('open') ? 'Filters ▲' : 'Filters ▼';
 });
 
 function toggleFilter(filterType, value) {
@@ -130,6 +137,7 @@ function filterNPCs() {
 
     displayNPCs(filteredNPCs);
 }
+
 function displayNPCs(filteredNPCs) {
     const npcList = document.getElementById('main-content');
     npcList.innerHTML = filteredNPCs.map(npc => createNPCCard(npc, false)).join('');
@@ -207,19 +215,24 @@ document.addEventListener("DOMContentLoaded", () => {
     npcList.innerHTML = npcs.map(npc => createNPCCard(npc, true)).join('');
     sortNPCs();
     initializeLazyLoading();
-});
 
-document.querySelectorAll('.filter-title').forEach(title => {
-    title.addEventListener('click', () => {
-        const filterSection = title.closest('.filter-section');
-        filterSection.classList.toggle('open');
-        
-        // Animate filter buttons
-        const filterButtons = filterSection.querySelectorAll('.filter-button');
-        filterButtons.forEach((button, index) => {
-            setTimeout(() => {
-                button.style.transform = filterSection.classList.contains('open') ? 'scale(1)' : 'scale(0)';
-            }, index * 50); // Stagger the animation
+    document.querySelectorAll('.filter-title').forEach(title => {
+        title.addEventListener('click', () => {
+            const filterSection = title.closest('.filter-section');
+            filterSection.classList.toggle('open');
+            
+            // Update arrow
+            const arrow = title.querySelector('.arrow');
+            arrow.textContent = filterSection.classList.contains('open') ? '▲' : '▼';
+
+            // Animate filter buttons
+            const filterButtons = filterSection.querySelectorAll('.filter-button');
+            filterButtons.forEach((button, index) => {
+                setTimeout(() => {
+                    button.style.opacity = filterSection.classList.contains('open') ? '1' : '0';
+                    button.style.transform = filterSection.classList.contains('open') ? 'scale(1)' : 'scale(0.8)';
+                }, index * 30);
+            });
         });
     });
 });
