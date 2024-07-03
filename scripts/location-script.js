@@ -17,6 +17,7 @@ const sortButtons = document.querySelectorAll('.sort-button');
 // Event listeners
 searchInput.addEventListener('input', filterLocations);
 window.addEventListener('scroll', handleScroll);
+window.addEventListener('hashchange', setFiltersFromHash);
 backToTopButton.addEventListener('click', scrollToTop);
 filterToggle.addEventListener('click', toggleFilterDropdown);
 sortToggle.addEventListener('click', toggleSortButtons);
@@ -28,6 +29,19 @@ sortButtons.forEach(button => {
         toggleSortButtons();
     });
 });
+
+function setFiltersFromHash() {
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+        const filters = hash.split('&');
+        filters.forEach(filter => {
+            const [type, value] = filter.split('=');
+            if (type && value) {
+                toggleFilter(type, decodeURIComponent(value), true);
+            }
+        });
+    }
+}
 
 function toggleFilter(filterType, value, keepDropdownClosed = false) {
     const button = document.querySelector(`button[onclick="toggleFilter('${filterType}', '${value}')"]`);
@@ -42,6 +56,18 @@ function toggleFilter(filterType, value, keepDropdownClosed = false) {
 	filterLocations();
     highlightActiveTags();
 	updateModalTags();
+	updateUrlHash();
+}
+
+function updateUrlHash() {
+    const filterStrings = [];
+    for (const [type, values] of Object.entries(activeFilters)) {
+        for (const value of values) {
+            filterStrings.push(`${type}=${encodeURIComponent(value)}`);
+        }
+    }
+    const newHash = filterStrings.join('&');
+    history.replaceState(null, null, newHash ? `#${newHash}` : ' ');
 }
 
 function highlightActiveTags() {
@@ -66,6 +92,7 @@ function clearFilters() {
     Object.keys(activeFilters).forEach(key => activeFilters[key].clear());
     document.querySelectorAll('.filter-button').forEach(button => button.classList.remove('active'));
     searchInput.value = '';
+	history.replaceState(null, null, ' ');
 }
 
 function filterLocations() {
@@ -264,6 +291,7 @@ function initializeLazyLoading() {
 document.addEventListener("DOMContentLoaded", () => {
     displayLocations(locations);
     initializeLazyLoading();
+	setFiltersFromHash();
 
     document.querySelectorAll('.filter-title').forEach(title => {
         title.addEventListener('click', () => {
