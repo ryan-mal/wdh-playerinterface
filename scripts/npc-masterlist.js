@@ -8,7 +8,8 @@ const npcs = [
         race: ["Human"],
         image: "images/NPC_Images/Vajra_Safahr.png",
         description: "The Seventh Blackstaff, archmage of Waterdeep, and leader of the Grey Hands and Blackstaff Academy.",
-        isAlive: true
+        isAlive: true,
+        notableInfo: "Rumored to be searching for powerful artifacts hidden within Waterdeep. Recently thwarted a magical attack on the Yawning Portal."
     },
     {
         name: "Davil Starsong",
@@ -30,7 +31,8 @@ const npcs = [
         race: ["Elf"],
         image: "images/NPC_Images/Laeral_Silverhand.png",
         description: "The Open Lord of Waterdeep, a powerful mage and diplomat who governs the city.",
-        isAlive: true
+        isAlive: true,
+        notableInfo: "Holds significant political power and is known for her centuries of experience. Rumored to have connections with various extraplanar entities."
     },
     {
         name: "Mirt",
@@ -41,7 +43,8 @@ const npcs = [
         race: ["Human"],
         image: "images/NPC_Images/Mirt.png",
         description: "The Leader of the Waterdeep Harper Sect.",
-        isAlive: true
+        isAlive: true,
+        notableInfo: "Known for his vast network of informants across the city. Said to have a collection of rare and powerful magical items."
     },
     {
         name: "Xanathar",
@@ -52,7 +55,8 @@ const npcs = [
         race: ["Beholder"],
         image: "images/NPC_Images/Xanathar.png",
         description: "The Leader of the underground thieves guild.",
-        isAlive: true
+        isAlive: true,
+        notableInfo: "Controls a vast criminal network beneath Waterdeep. Obsessed with collecting magical items and information about the city's nobles."
     }
 ];
 
@@ -163,7 +167,8 @@ function createNPCCard(npc, useLazyLoading = true) {
          data-wards="${npc.wards.join(',')}" 
          data-factions="${npc.factions.join(',')}"
          data-status="${npc.status.join(',')}"
-         data-race="${npc.race.join(',')}">
+         data-race="${npc.race.join(',')}"
+         onclick="openModal('${npc.name.replace(/\s+/g, '-').toLowerCase()}')">
         <div class="image-container">
             <img ${useLazyLoading ? 'data-src' : 'src'}="${npc.image}" alt="${npc.name}" class="profile-img ${useLazyLoading ? 'lazy' : ''}">
             ${!npc.isAlive ? '<div class="status-overlay">Deceased</div>' : ''}
@@ -181,6 +186,62 @@ function createNPCCard(npc, useLazyLoading = true) {
         </div>
     </div>
     `;
+}
+
+function openModal(npcId) {
+    const modal = document.getElementById('npc-modal');
+    const modalContent = document.getElementById('modal-npc-content');
+    const npc = npcs.find(n => n.name.replace(/\s+/g, '-').toLowerCase() === npcId);
+
+    if (npc) {
+        modalContent.innerHTML = createModalContent(npc);
+        modal.style.display = 'block';
+        window.location.hash = npcId;
+    }
+}
+
+function createModalContent(npc) {
+    return `
+        <div class="modal-header">
+            <h2>${npc.name}</h2>
+            <p class="npc-title">${npc.title || ''}</p>
+        </div>
+        <div class="modal-body">
+            <img src="${npc.image}" alt="${npc.name}" class="modal-img">
+            <div class="modal-info">
+                <div class="tags-container">
+                    ${npc.wards.map(ward => `<span class="tag ward-tag" title="Ward">${ward}</span>`).join('')}
+                    ${npc.factions.map(faction => `<span class="tag faction-tag" title="Faction">${faction}</span>`).join('')}
+                    ${npc.status.map(status => `<span class="tag status-tag" title="Status">${status}</span>`).join('')}
+                    ${npc.race.map(race => `<span class="tag race-tag" title="Race">${race}</span>`).join('')}
+                </div>
+                <p class="modal-description">${npc.description}</p>
+                ${npc.notableInfo ? `
+                <div class="modal-notable-info">
+                    <h3>Notable Information</h3>
+                    <p>${npc.notableInfo}</p>
+                </div>
+                ` : ''}
+            </div>
+        </div>
+    `;
+}
+
+// Close modal when clicking the close button or outside the modal
+window.onclick = function(event) {
+    const modal = document.getElementById('npc-modal');
+    if (event.target == modal || event.target.className == 'close') {
+        modal.style.display = 'none';
+        window.location.hash = '';
+    }
+}
+
+// Check for hash in URL on page load
+window.onload = function() {
+    if(window.location.hash) {
+        const npcId = window.location.hash.substring(1);
+        openModal(npcId);
+    }
 }
 
 function initializeLazyLoading() {
