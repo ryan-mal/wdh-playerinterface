@@ -29,7 +29,7 @@ const npcs = [
         title: "Open Lord",
         wards: ["Castle Ward"],
         factions: ["Lords Alliance"],
-        status: ["City Official"],
+        status: ["City Official", "Leader"],
         race: ["Elf"],
         image: "images/NPC_Images/Laeral_Silverhand.png",
         description: "The Open Lord of Waterdeep, a powerful mage and diplomat who governs the city.",
@@ -53,7 +53,7 @@ const npcs = [
     {
         name: "Xanathar",
         title: "Don",
-        wards: ["Undermountain/Skullport"],
+        wards: ["Undermountain/Skullport", "Dock Ward", "Field Ward"],
         factions: ["Xanathars Thieves Guild"],
         status: ["Criminal", "Leader"],
         race: ["Beholder"],
