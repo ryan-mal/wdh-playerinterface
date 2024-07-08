@@ -7,22 +7,10 @@
     <link rel="stylesheet" href="styles/location-styles.css">
 </head>
 <body>
-    <header>
-        <h1>Waterdeep: Dragon Heist</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#characters">Characters</a></li>
-                <li><a href="index.html#map">City Map</a></li>
-                <li><a href="locations.html">Locations</a></li>
-                <li><a href="NPC.html">NPCs</a></li> 
-            </ul>
-        </nav>
-    </header>
-    
+
     <!-- <h1>Locations of Waterdeep</h1> -->
     <br>
-    
+
     <div class="filter-container">
         <button id="filter-toggle" class="filter-toggle">Filters ▼</button>
         <div id="filter-dropdown" class="filter-dropdown">
@@ -30,16 +18,16 @@
                 <h2 class="filter-title">Filter by Ward <span class="arrow">▼</span></h2>
                 <div class="filter-buttons ward-filters">
                     <!-- Ward filter buttons -->
-					<button class="filter-button" aria-label="Filter by Ardeep Forest" onclick="toggleFilter('ward', 'Ardeep Forest')">Ardeep Forest</button>
-					<button class="filter-button" aria-label="Filter by Castle Ward" onclick="toggleFilter('ward', 'Castle Ward')">Castle Ward</button>
-					<button class="filter-button" aria-label="Filter by Dock Ward" onclick="toggleFilter('ward', 'Dock Ward')">Dock Ward</button>
-					<button class="filter-button" aria-label="Filter by Field Ward" onclick="toggleFilter('ward', 'Field Ward')">Field Ward</button>
-					<button class="filter-button" aria-label="Filter by North Ward" onclick="toggleFilter('ward', 'North Ward')">North Ward</button>
-					<button class="filter-button" aria-label="Filter by Sea Ward" onclick="toggleFilter('ward', 'Sea Ward')">Sea Ward</button>
-					<button class="filter-button" aria-label="Filter by Southern Ward" onclick="toggleFilter('ward', 'Southern Ward')">Southern Ward</button>
-					<button class="filter-button" aria-label="Filter by Trades Ward" onclick="toggleFilter('ward', 'Trades Ward')">Trades Ward</button>
-					<button class="filter-button" aria-label="Filter by Undercliff" onclick="toggleFilter('ward', 'Undercliff')">Undercliff</button>
-					<button class="filter-button" aria-label="Filter by Undermountain/Skullport" onclick="toggleFilter('ward', 'Undermountain/Skullport')">Undermountain/Skullport</button>
+                    <button class="filter-button" aria-label="Filter by Ardeep Forest" onclick="toggleFilter('ward', 'Ardeep Forest')">Ardeep Forest</button>
+                    <button class="filter-button" aria-label="Filter by Castle Ward" onclick="toggleFilter('ward', 'Castle Ward')">Castle Ward</button>
+                    <button class="filter-button" aria-label="Filter by Dock Ward" onclick="toggleFilter('ward', 'Dock Ward')">Dock Ward</button>
+                    <button class="filter-button" aria-label="Filter by Field Ward" onclick="toggleFilter('ward', 'Field Ward')">Field Ward</button>
+                    <button class="filter-button" aria-label="Filter by North Ward" onclick="toggleFilter('ward', 'North Ward')">North Ward</button>
+                    <button class="filter-button" aria-label="Filter by Sea Ward" onclick="toggleFilter('ward', 'Sea Ward')">Sea Ward</button>
+                    <button class="filter-button" aria-label="Filter by Southern Ward" onclick="toggleFilter('ward', 'Southern Ward')">Southern Ward</button>
+                    <button class="filter-button" aria-label="Filter by Trades Ward" onclick="toggleFilter('ward', 'Trades Ward')">Trades Ward</button>
+                    <button class="filter-button" aria-label="Filter by Undercliff" onclick="toggleFilter('ward', 'Undercliff')">Undercliff</button>
+                    <button class="filter-button" aria-label="Filter by Undermountain/Skullport" onclick="toggleFilter('ward', 'Undermountain/Skullport')">Undermountain/Skullport</button>
                 </div>
             </div>
 
@@ -47,22 +35,22 @@
                 <h2 class="filter-title">Filter by Type <span class="arrow">▼</span></h2>
                 <div class="filter-buttons type-filters">
                     <!-- Type filter buttons -->
-					<button class="filter-button" aria-label="Filter by Bases" onclick="toggleFilter('type', 'Base')">Bases</button>
-					<button class="filter-button" aria-label="Filter by City Buildings" onclick="toggleFilter('type', 'City Building')">City Buildigs</button>
-					<button class="filter-button" aria-label="Filter by Academies" onclick="toggleFilter('type', 'Academy')">Academies</button>
-					<button class="filter-button" aria-label="Filter by Temples" onclick="toggleFilter('type', 'Temple')">Temples</button>
-					<button class="filter-button" aria-label="Filter by Warehouses" onclick="toggleFilter('type', 'Warehouse')">Warehouses</button>
-					<button class="filter-button" aria-label="Filter by Residences" onclick="toggleFilter('type', 'Residence')">Residences</button>
-					<button class="filter-button" aria-label="Filter by Businesses" onclick="toggleFilter('type', 'Business')">Businesses</button>
-					<button class="filter-button" aria-label="Filter by Guildhalls" onclick="toggleFilter('type', 'Guildhall')">Guildhalls</button>
-					<button class="filter-button" aria-label="Filter by Inns, Taverns, Festhalls" onclick="toggleFilter('type', 'Inn, Tavern, Festhall')">Inns, Taverns, Festhalls</button>
-					<button class="filter-button" aria-label="Filter by Noble Villas" onclick="toggleFilter('type', 'Noble Villa')">Noble Villas</button>
-					<button class="filter-button" aria-label="Filter by Places & Streets" onclick="toggleFilter('type', 'Places & Streets')">Places & Streets</button>
-					<button class="filter-button" aria-label="Filter by Miscellaneous" onclick="toggleFilter('type', 'Miscellaneous')">Miscellaneous</button>
+                    <button class="filter-button" aria-label="Filter by Bases" onclick="toggleFilter('type', 'Base')">Bases</button>
+                    <button class="filter-button" aria-label="Filter by City Buildings" onclick="toggleFilter('type', 'City Building')">City Buildigs</button>
+                    <button class="filter-button" aria-label="Filter by Academies" onclick="toggleFilter('type', 'Academy')">Academies</button>
+                    <button class="filter-button" aria-label="Filter by Temples" onclick="toggleFilter('type', 'Temple')">Temples</button>
+                    <button class="filter-button" aria-label="Filter by Warehouses" onclick="toggleFilter('type', 'Warehouse')">Warehouses</button>
+                    <button class="filter-button" aria-label="Filter by Residences" onclick="toggleFilter('type', 'Residence')">Residences</button>
+                    <button class="filter-button" aria-label="Filter by Businesses" onclick="toggleFilter('type', 'Business')">Businesses</button>
+                    <button class="filter-button" aria-label="Filter by Guildhalls" onclick="toggleFilter('type', 'Guildhall')">Guildhalls</button>
+                    <button class="filter-button" aria-label="Filter by Inns, Taverns, Festhalls" onclick="toggleFilter('type', 'Inn, Tavern, Festhall')">Inns, Taverns, Festhalls</button>
+                    <button class="filter-button" aria-label="Filter by Noble Villas" onclick="toggleFilter('type', 'Noble Villa')">Noble Villas</button>
+                    <button class="filter-button" aria-label="Filter by Places & Streets" onclick="toggleFilter('type', 'Places & Streets')">Places & Streets</button>
+                    <button class="filter-button" aria-label="Filter by Miscellaneous" onclick="toggleFilter('type', 'Miscellaneous')">Miscellaneous</button>
                 </div>
             </div>
         </div>
-        
+
         <div class="search-and-actions">
             <div class="search-container">
                 <input type="text" id="search-input" aria-label="Search Locations or Tags" placeholder="Search Locations or Tags...">
@@ -85,14 +73,15 @@
     <main id="main-content" class="grid-container">
         <!-- Location cards will be dynamically inserted here -->
     </main>
-    
+
     <div id="location-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <div id="modal-location-content"></div>
         </div>
     </div>
-    
+
+    <script src="scripts/load-header.js"></script>
     <footer>
         <p>&copy; 2024 Waterdeep: Dragon Heist Campaign. All rights reserved.</p>
     </footer>

@@ -7,26 +7,14 @@
     <link rel="stylesheet" href="styles/NPC-styles.css">
 </head>
 <body>
-    <header>
-        <h1>Waterdeep: Dragon Heist</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#characters">Characters</a></li>
-                <li><a href="index.html#map">City Map</a></li>
-                <li><a href="locations.html">Locations</a></li>
-                <li><a href="NPC.html">NPCs</a></li> 
-            </ul>
-        </nav>
-    </header>
-    
-    <h1></h1>
-    <br>
-    
-    <div class="filter-container">
-        <button id="filter-toggle" class="filter-toggle">Filters ▼</button>
-        <div id="filter-dropdown" class="filter-dropdown">
-            <!-- Filter sections (Ward, Faction, Status, Race) remain unchanged -->
+
+	<h1></h1>
+	<br>
+
+	<div class="filter-container">
+		<button id="filter-toggle" class="filter-toggle">Filters ▼</button>
+		<div id="filter-dropdown" class="filter-dropdown">
+			<!-- Filter sections (Ward, Faction, Status, Race) remain unchanged -->
 
 			<div class="filter-section">
 				<h2 class="filter-title">Filter by Ward <span class="arrow">▼</span></h2>
@@ -59,7 +47,7 @@
 					<button class="filter-button" aria-label="Filter by Xanathar's Thieves' Guild" onclick="toggleFilter('faction', 'Xanathars Thieves Guild')">Xanathar's Thieves' Guild</button>
 				</div>
 			</div>
-			
+
 			<div class="filter-section">
 				<h2 class="filter-title">Filter by Status <span class="arrow">▼</span></h2>
 				<div class="filter-buttons status-filters">
@@ -139,16 +127,16 @@
 					<button class="filter-button" aria-label="Filter by Yuan-Ti" onclick="toggleFilter('race', 'Yuan-Ti')">Yuan-Ti</button>
 				</div>
 			</div>
-        </div>
-        
-        <div class="search-and-actions">
-            <div class="search-container">
-                <input type="text" id="search-input" aria-label="Search NPCs or Tags" placeholder="Search NPCs or Tags...">
-            </div>
-            <div class="global-actions">
-                <button class="global-button" onclick="showAll()">Show All</button>
-            </div>
-        </div>
+		</div>
+
+		<div class="search-and-actions">
+			<div class="search-container">
+				<input type="text" id="search-input" aria-label="Search NPCs or Tags" placeholder="Search NPCs or Tags...">
+			</div>
+			<div class="global-actions">
+				<button class="global-button" onclick="showAll()">Show All</button>
+			</div>
+		</div>
 
 		<div class="sort-container">
 			<button class="sort-toggle">Sort ⏵</button>
@@ -160,26 +148,27 @@
 				<button class="sort-button" data-sort="race">Race</button>
 			</div>
 		</div>
-    </div>
+	</div>
 
-    <main id="main-content" class="grid-container">
-        <!-- NPC cards will be dynamically inserted here -->
-    </main>
-    
-    <div id="npc-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div id="modal-npc-content"></div>
-        </div>
-    </div>
-    
-    <footer>
-        <p>&copy; 2024 Waterdeep: Dragon Heist Campaign. All rights reserved.</p>
-    </footer>
+	<main id="main-content" class="grid-container">
+		<!-- NPC cards will be dynamically inserted here -->
+	</main>
 
-    <button id="back-to-top" aria-label="Back to top">↑</button>
+	<div id="npc-modal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<div id="modal-npc-content"></div>
+		</div>
+	</div>
 
-    <script src="data/npc-data.js"></script>
-    <script src="scripts/npc-script.js"></script>
+	<footer>
+		<p>&copy; 2024 Waterdeep: Dragon Heist Campaign. All rights reserved.</p>
+	</footer>
+
+	<button id="back-to-top" aria-label="Back to top">↑</button>
+
+	<script src="data/npc-data.js"></script>
+	<script src="scripts/npc-script.js"></script>
+	<script src="scripts/load-header.js"></script>
 </body>
 </html>
