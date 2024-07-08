@@ -37,8 +37,12 @@ const homebrewData = {
             description: "You've been identified by a powerful faction within the city. While marked, you have disadvantage on Charisma (Deception) checks made to conceal your identity, and members of the faction that marked you have advantage on Wisdom (Perception) checks made to spot you in a crowd."
         },
         {
-            name: "Indebted",
-            description: "You owe a significant debt to a powerful individual or organization. While indebted, you must succeed on a DC 15 Wisdom saving throw to refuse a direct request from your creditor. On a failed save, you feel compelled to comply with the request, even if it goes against your better judgment."
+            name: "Exhausted",
+            description: "While you are subjected to the Exhaustion Condition, you experience the following effects:<br><br>" +
+                "<b>Levels of Exhaustion.</b> This Condition is cumulative. Each time you receive it, you gain 1 level of exhaustion. You die if your exhaustion level exceeds 10.<br>" +
+                "<b>d20 Rolls Affected.</b> When you make a d20 Test, you subtract your exhaustion level from the d20 roll.<br>" +
+                "<b>Spell Save DCs Affected.</b> Subtract your exhaustion level from the Spell save DC of any Spell you cast.<br>" +
+                "<b>Ending the Condition.</b> Finishing a Long Rest removes 1 of your levels of exhaustion. When your exhaustion level reaches 0, you are no longer Exhausted."
         }
     ]
 };
