@@ -13,7 +13,7 @@ const homebrewData = {
         {
             name: "Whispers of the City",
             level: 1,
-            school: "Divination",
+            school: "Divination (ritual)",
             castingTime: "1 action",
             range: "30 feet",
             components: "V, S",
