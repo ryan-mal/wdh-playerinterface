@@ -1,4 +1,4 @@
-const locations = [
+var locations = [
     {
         name: "The Yawning Portal",
         ward: "Castle Ward",
