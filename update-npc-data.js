@@ -10,14 +10,14 @@ function extractNpcData(filePath) {
     try {
         const content = fs.readFileSync(filePath, 'utf8');
         const [, frontmatter] = content.split('---');
-        
+
         const data = yaml.load(frontmatter);
-        
+
         if (data.metParty !== true) {
             return null; // Skip this NPC if they haven't met the party
         }
 
-        let imagePath = data.art 
+        let imagePath = data.art
             ? path.join('images', 'NPC_Images', path.basename(data.art))
             : path.join('images', 'NPC_Images', 'PlaceholderImage.png');
 
@@ -28,14 +28,14 @@ function extractNpcData(filePath) {
             imagePath = path.join('images', 'NPC_Images', 'PlaceholderImage.png');
         }
 
-        // Helper function to remove [[ and ]] from strings
-        const cleanBrackets = (str) => str.replace(/\[\[|\]\]/g, '');
+        // Helper function to remove [[ and ]] from strings and apostrophes
+        const cleanString = (str) => str.replace(/\[\[|\]\]/g, '').replace(/'/g, '');
 
         return {
             name: path.basename(filePath, '.md'),
             title: data.aliases && data.aliases.length > 0 ? data.aliases[0] : '',
-            wards: (data.wards || []).map(cleanBrackets),
-            factions: (data.organization || []).map(cleanBrackets),
+            wards: (data.wards || []).map(cleanString),
+            factions: (data.organization || []).map(cleanString),
             status: data.status || [],
             race: [data.ancestry, data.heritage].filter(Boolean),
             image: imagePath,
