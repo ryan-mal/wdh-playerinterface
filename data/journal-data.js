@@ -23,5 +23,19 @@ const journalEntries = [
 
         With Floon rescued, the party made their way back to the surface, navigating through the labyrinthine sewers once more. They emerged into the streets of Waterdeep, battered but victorious, ready to return Floon to safety and collect their reward from Volo. The experience had bonded them as a team, but also left them with many questions about the larger conflicts brewing in the city of splendors.`
     },
+    {
+        sessionNumber: 3.1,
+        date: "3/2/2022",
+        title: "Nihiloor's Intellect Devourer",
+        day: "Ches 1, 1492 DR",
+        description: `The party ventured  from Volo. The experie.`
+    },
+    {
+        sessionNumber: 3.2,
+        date: "3/2/2022",
+        title: "Nihiloor's Intellect Devourer",
+        day: "Ches 1, 1492 DR",
+        description: `am, but also left them with many questions about the larger conflicts brewing in the city of splendors.`
+    },
     // Add more entries as needed
 ];
