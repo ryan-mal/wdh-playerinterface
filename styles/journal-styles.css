@@ -54,7 +54,8 @@ nav ul {
     gap: 2rem;
     max-width: 1200px;
     margin: 2rem auto;
-    padding: 0 1rem;
+    padding: 0 1rem 0 271px;
+    position: relative;
 }
 
 /* Navigation Sidebar */
@@ -64,10 +65,28 @@ nav ul {
     background-color: #2a2a2a;
     border-radius: 5px;
     padding: 1.5rem;
-    position: sticky;
+    position: fixed;
+    left: max(calc((100% - 1200px) / 2 + 1rem), 1rem); /* Aligns with container's left edge */
     top: calc(var(--header-height) + 2rem);
     max-height: calc(100vh - var(--header-height) - 4rem);
     overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #ffd700 #2a2a2a;
+}
+
+/* Webkit scrollbar styling */
+.journal-nav::-webkit-scrollbar {
+    width: 8px;
+}
+
+.journal-nav::-webkit-scrollbar-track {
+    background: #2a2a2a;
+}
+
+.journal-nav::-webkit-scrollbar-thumb {
+    background-color: #ffd700;
+    border-radius: 4px;
+    border: 2px solid #2a2a2a;
 }
 
 .journal-nav-day {
@@ -112,6 +131,7 @@ nav ul {
 .journal-entries {
     flex: 1;
     min-width: 0;
+    margin-left: 230px; /* Remove the previous margin since we're using container padding */
 }
 
 .journal-group {
@@ -133,9 +153,9 @@ nav ul {
     margin-bottom: 2rem;
 }
 
-    .journal-entry:hover {
-        transform: translateY(-5px);
-    }
+.journal-entry:hover {
+    transform: translateY(-5px);
+}
 
 .journal-entry-flex {
     flex: 1;
@@ -182,14 +202,19 @@ nav ul {
 /* Responsive design */
 @media (max-width: 968px) {
     .journal-container {
-        flex-direction: column;
+        padding: 0 1rem; /* Reset padding on mobile */
     }
 
     .journal-nav {
         position: relative;
+        left: 0;
         top: 0;
         width: 100%;
         max-height: none;
+    }
+
+    .journal-entries {
+        margin-left: 0;
     }
 
     .journal-group-flex {
@@ -201,6 +226,7 @@ nav ul {
         width: 100%;
     }
 }
+
 
 footer {
     text-align: center;
