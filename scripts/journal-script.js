@@ -72,24 +72,42 @@ document.addEventListener('DOMContentLoaded', function () {
         return Math.floor(parseFloat(sessionNumber));
     }
 
+    function shouldGroupTogether(current, next) {
+        if (!next) return false;
+
+        const currentBase = getBaseSessionNumber(current.sessionNumber);
+        const nextBase = getBaseSessionNumber(next.sessionNumber);
+
+        if (currentBase !== nextBase) return false;
+
+        // Check if both sessions have decimal parts
+        const currentDecimal = current.sessionNumber % 1;
+        const nextDecimal = next.sessionNumber % 1;
+
+        // Group together only if both have non-.5 decimals (like .1, .2)
+        // Don't group if either is a .5
+        if (currentDecimal === 0.5 || nextDecimal === 0.5) return false;
+        if (currentDecimal > 0 && nextDecimal > 0) return true;
+
+        return false;
+    }
+
     function groupEntries(entries) {
         const groups = [];
         let currentGroup = [];
-        
+
         entries.forEach((entry, index) => {
-            const currentBase = getBaseSessionNumber(entry.sessionNumber);
-            const nextEntry = entries[index + 1];
-            const nextBase = nextEntry ? getBaseSessionNumber(nextEntry.sessionNumber) : null;
-            
             currentGroup.push(entry);
-            
-            // If next entry isn't part of current session number or this is the last entry
-            if (!nextEntry || currentBase !== nextBase) {
+
+            const nextEntry = entries[index + 1];
+
+            // Check if current entry should be grouped with next entry
+            if (!shouldGroupTogether(entry, nextEntry)) {
                 groups.push(currentGroup);
                 currentGroup = [];
             }
         });
-        
+
         return groups;
     }
 
