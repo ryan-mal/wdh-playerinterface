@@ -1,29 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const journalContainer = document.getElementById('journal-entries');
-
-    function createJournalEntry(entry) {
-        const entryElement = document.createElement('div');
-        entryElement.className = 'journal-entry';
-
-        let titleHtml = entry.title 
-            ? `<h2>${entry.sessionNumber}. ${entry.title}</h2>`
-            : `<h2>Session ${entry.sessionNumber}</h2>`;
-
-        let metaHtml = `
-            <div class="journal-meta">
-                <span class="journal-date">${entry.date}</span>
-                ${entry.day ? `<span class="journal-day">Day: ${entry.day}</span>` : ''}
-            </div>
-        `;
-
-        let descriptionHtml = `<div class="journal-content">${formatDescription(entry.description)}</div>`;
-
-        entryElement.innerHTML = metaHtml + titleHtml + descriptionHtml;
-
-        return entryElement;
-    }
-
     function formatDescription(description) {
+        // Split the description into paragraphs
         const paragraphs = description.split('\n\n');
         return paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
     }
@@ -54,14 +31,133 @@ document.addEventListener('DOMContentLoaded', function() {
         return groups;
     }
 
-    function renderJournalEntries() {
+    function createNavigation() {
+        // Group entries by game day
+        const entriesByDay = {};
+        journalEntries.forEach(entry => {
+            if (!entriesByDay[entry.day]) {
+                entriesByDay[entry.day] = [];
+            }
+            entriesByDay[entry.day].push(entry);
+        });
+
+        // Create navigation element
+        const nav = document.createElement('nav');
+        nav.className = 'journal-nav';
+
+        // Sort days chronologically
+        const sortedDays = Object.keys(entriesByDay).sort((a, b) => {
+            // Extract month and day number for comparison
+            const [aMonth, aDay] = a.split(' ');
+            const [bMonth, bDay] = b.split(' ');
+            // You might want to add proper month comparison logic here
+            return parseInt(aDay) - parseInt(bDay);
+        });
+
+        // Create navigation structure
+        sortedDays.forEach(day => {
+            const daySection = document.createElement('div');
+            daySection.className = 'journal-nav-day';
+            
+            const dayTitle = document.createElement('h3');
+            dayTitle.textContent = day;
+            
+            const linksList = document.createElement('div');
+            linksList.className = 'journal-nav-links';
+            
+            entriesByDay[day].forEach(entry => {
+                const link = document.createElement('a');
+                link.href = `#session-${entry.sessionNumber}`;
+                link.className = 'journal-nav-link';
+                link.textContent = `${entry.sessionNumber}. ${entry.title || 'Session ' + entry.sessionNumber}`;
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.getElementById(`session-${entry.sessionNumber}`)
+                        .scrollIntoView({ behavior: 'smooth' });
+                });
+                linksList.appendChild(link);
+            });
+            
+            daySection.appendChild(dayTitle);
+            daySection.appendChild(linksList);
+            nav.appendChild(daySection);
+        });
+
+        return nav;
+    }
+
+    function createJournalEntry(entry) {
+        const entryElement = document.createElement('div');
+        entryElement.className = 'journal-entry';
+        entryElement.id = `session-${entry.sessionNumber}`;
+
+        let titleHtml = entry.title 
+            ? `<h2>${entry.sessionNumber}. ${entry.title}</h2>`
+            : `<h2>Session ${entry.sessionNumber}</h2>`;
+
+        let metaHtml = `
+            <div class="journal-meta">
+                <span class="journal-date">${entry.date}</span>
+                ${entry.day ? `<span class="journal-day">Day: ${entry.day}</span>` : ''}
+            </div>
+        `;
+
+        let descriptionHtml = `<div class="journal-content">${formatDescription(entry.description)}</div>`;
+
+        entryElement.innerHTML = metaHtml + titleHtml + descriptionHtml;
+
+        return entryElement;
+    }
+
+    function addScrollSpy() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Remove active class from all links
+                    document.querySelectorAll('.journal-nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    
+                    // Add active class to corresponding link
+                    const id = entry.target.id;
+                    const correspondingLink = document.querySelector(`.journal-nav-link[href="#${id}"]`);
+                    if (correspondingLink) {
+                        correspondingLink.classList.add('active');
+                    }
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        // Observe all journal entries
+        document.querySelectorAll('.journal-entry').forEach(entry => {
+            observer.observe(entry);
+        });
+    }
+
+    function renderJournal() {
+        // Get the original container
+        const originalContainer = document.getElementById('journal-entries');
+
+        // Create main container
+        const mainContainer = document.createElement('div');
+        mainContainer.className = 'journal-container';
+
+        // Add navigation
+        const nav = createNavigation();
+        mainContainer.appendChild(nav);
+
+        // Create entries container
+        const entriesContainer = document.createElement('div');
+        entriesContainer.className = 'journal-entries';
+
+        // Render entries
         const groups = groupEntries(journalEntries);
-        
         groups.forEach(group => {
             const groupContainer = document.createElement('div');
             groupContainer.className = 'journal-group';
             
-            // Apply flex layout if there are multiple entries in the group
             if (group.length > 1) {
                 groupContainer.classList.add('journal-group-flex');
             }
@@ -74,9 +170,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 groupContainer.appendChild(entryElement);
             });
             
-            journalContainer.appendChild(groupContainer);
+            entriesContainer.appendChild(groupContainer);
         });
+
+        mainContainer.appendChild(entriesContainer);
+
+        // Replace existing content
+        originalContainer.replaceWith(mainContainer);
+
+        // Add scroll spy functionality
+        addScrollSpy();
     }
 
-    renderJournalEntries();
+    // Initialize the journal
+    renderJournal();
 });

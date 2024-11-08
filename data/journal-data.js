@@ -14,7 +14,7 @@ const journalEntries = [
         sessionNumber: 2,
         date: "3/2/2022",
         title: "Nihiloor's Intellect Devourer",
-        day: "Ches 1, 1492 DR",
+        day: "Ches 2, 1492 DR",
         description: `The party ventured into the sewers beneath Waterdeep, following clues to find their kidnapped quarry, Floon Blagmaar. The dank, putrid tunnels twisted and turned, leading them deeper into the city's underbelly. As they navigated the treacherous passages, they encountered various denizens of the depths, including a group of Kuo-toa that worshipped a statue they called "Blibdoolpoolp."
 
         Their journey through the sewers was fraught with danger, but also yielded unexpected allies. They rescued a friendly flumph named Xolp, who provided them with crucial information about the Xanathar Guild's nearby base. The flumph's telepathic abilities and knowledge of the area proved invaluable as they pressed on.
@@ -27,14 +27,14 @@ const journalEntries = [
         sessionNumber: 3.1,
         date: "3/2/2022",
         title: "Nihiloor's Intellect Devourer",
-        day: "Ches 1, 1492 DR",
+        day: "Ches 3, 1492 DR",
         description: `The party ventured  from Volo. The experie.`
     },
     {
         sessionNumber: 3.2,
         date: "3/2/2022",
         title: "Nihiloor's Intellect Devourer",
-        day: "Ches 1, 1492 DR",
+        day: "Ches 3, 1492 DR",
         description: `am, but also left them with many questions about the larger conflicts brewing in the city of splendors.`
     },
     // Add more entries as needed
