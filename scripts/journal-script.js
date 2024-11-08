@@ -1,4 +1,66 @@
-document.addEventListener('DOMContentLoaded', function() {
+// Front matter parser
+function parseFrontMatter(content) {
+    const frontMatterRegex = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/;
+    const match = content.match(frontMatterRegex);
+
+    if (!match) return null;
+
+    const [, frontMatter, body] = match;
+    const metadata = {};
+
+    // Parse the front matter
+    frontMatter.split('\n').forEach(line => {
+        const [key, ...valueParts] = line.split(':');
+        if (key && valueParts.length) {
+            let value = valueParts.join(':').trim();
+            // Remove quotes if they exist
+            if (value.startsWith('"') && value.endsWith('"')) {
+                value = value.slice(1, -1);
+            }
+            metadata[key.trim()] = value;
+        }
+    });
+
+    return {
+        metadata,
+        content: body.trim()
+    };
+}
+
+async function loadJournalEntries() {
+    try {
+        // Fetch the list of files from your entries directory
+        const response = await fetch('/journal/entries/');
+        const files = await response.json();  // This would need to be implemented on your server
+
+        const entries = await Promise.all(
+            files.map(async file => {
+                const response = await fetch(`/journal/entries/${file}`);
+                const text = await response.text();
+                const parsed = parseFrontMatter(text);
+
+                if (!parsed) return null;
+
+                return {
+                    ...parsed.metadata,
+                    description: parsed.content,
+                    sessionNumber: parseFloat(parsed.metadata.sessionNumber)
+                };
+            })
+        );
+
+        // Filter out any null entries and sort by session number
+        return entries
+            .filter(entry => entry !== null)
+            .sort((a, b) => a.sessionNumber - b.sessionNumber);
+
+    } catch (error) {
+        console.error('Error loading journal entries:', error);
+        return [];
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
     function formatDescription(description) {
         // Split the description into paragraphs
         const paragraphs = description.split('\n\n');

@@ -1,0 +1,17 @@
+{
+  "name": "wdh-playerinterface",
+  "version": "1.0.0",
+  "main": "update-npc-data.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node scripts/build-journal.js",
+    "new-session": "node scripts/create-session.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "gray-matter": "^4.0.3"
+  }
+}
