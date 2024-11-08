@@ -61,10 +61,29 @@ async function loadJournalEntries() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    function renderMarkdown(text) {
+        // Handle bold text
+        text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Handle underlined text using <u> tag
+        text = text.replace(/__(.*?)__/g, '<u>$1</u>');
+
+        // Handle italic text (single asterisks)
+        text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+        // Handle line breaks
+        text = text.replace(/\n\n/g, '</p><p>');
+        text = text.replace(/\n/g, '<br>');
+
+        return text;
+    }
+
     function formatDescription(description) {
-        // Split the description into paragraphs
+        // Split into paragraphs and apply markdown formatting to each
         const paragraphs = description.split('\n\n');
-        return paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
+        return paragraphs
+            .map(p => `<p>${renderMarkdown(p.trim())}</p>`)
+            .join('');
     }
 
     function getBaseSessionNumber(sessionNumber) {
@@ -171,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function () {
         entryElement.className = 'journal-entry';
         entryElement.id = `session-${entry.sessionNumber}`;
 
-        let titleHtml = entry.title 
+        let titleHtml = entry.title
             ? `<h2>${entry.sessionNumber}. ${entry.title}</h2>`
             : `<h2>Session ${entry.sessionNumber}</h2>`;
 

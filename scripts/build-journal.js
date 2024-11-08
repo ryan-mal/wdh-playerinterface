@@ -17,7 +17,7 @@ function extractSessionNumber(filename) {
 
 // Function to extract clean text content without metadata callouts
 function cleanContent(content) {
-    // Remove the metadata callout block
+    // Remove only the metadata callout block
     content = content.replace(/> \[!metadata\|metadata\][\s\S]*?(?=\n\n)/g, '');
 
     // Clean up any remaining empty lines at the start
