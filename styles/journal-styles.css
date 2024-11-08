@@ -120,3 +120,32 @@ footer {
         padding: 1rem;
     }
 }
+
+/* Add these to your existing journal-styles.css */
+
+.journal-group {
+    margin-bottom: 2rem;
+}
+
+.journal-group-flex {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.journal-entry-flex {
+    flex: 1;
+    min-width: 0; /* Prevents flex items from overflowing */
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 768px) {
+    .journal-group-flex {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .journal-entry-flex {
+        width: 100%;
+    }
+}

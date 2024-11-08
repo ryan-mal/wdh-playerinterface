@@ -24,17 +24,57 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function formatDescription(description) {
-        // Split the description into paragraphs
         const paragraphs = description.split('\n\n');
+        return paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
+    }
+
+    function getBaseSessionNumber(sessionNumber) {
+        // Convert session number to string and get the base number before any decimal
+        return Math.floor(parseFloat(sessionNumber));
+    }
+
+    function groupEntries(entries) {
+        const groups = [];
+        let currentGroup = [];
         
-        // Wrap each paragraph in <p> tags
-        return paragraphs.map(p => `<p>${p}</p>`).join('');
+        entries.forEach((entry, index) => {
+            const currentBase = getBaseSessionNumber(entry.sessionNumber);
+            const nextEntry = entries[index + 1];
+            const nextBase = nextEntry ? getBaseSessionNumber(nextEntry.sessionNumber) : null;
+            
+            currentGroup.push(entry);
+            
+            // If next entry isn't part of current session number or this is the last entry
+            if (!nextEntry || currentBase !== nextBase) {
+                groups.push(currentGroup);
+                currentGroup = [];
+            }
+        });
+        
+        return groups;
     }
 
     function renderJournalEntries() {
-        journalEntries.forEach(entry => {
-            const entryElement = createJournalEntry(entry);
-            journalContainer.appendChild(entryElement);
+        const groups = groupEntries(journalEntries);
+        
+        groups.forEach(group => {
+            const groupContainer = document.createElement('div');
+            groupContainer.className = 'journal-group';
+            
+            // Apply flex layout if there are multiple entries in the group
+            if (group.length > 1) {
+                groupContainer.classList.add('journal-group-flex');
+            }
+            
+            group.forEach(entry => {
+                const entryElement = createJournalEntry(entry);
+                if (group.length > 1) {
+                    entryElement.classList.add('journal-entry-flex');
+                }
+                groupContainer.appendChild(entryElement);
+            });
+            
+            journalContainer.appendChild(groupContainer);
         });
     }
 
