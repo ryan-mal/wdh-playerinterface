@@ -108,5 +108,95 @@ const journalEntries = [
     "tags": [
       "#SessionRecap"
     ]
+  },
+  {
+    "sessionNumber": 10.1,
+    "title": "Framed & Away",
+    "date": "04/07/2022",
+    "day": "Ches 5th",
+    "description": "**Laplace** and **Vernon** awoke to find themselves surrounded by **Meloon Wardragon** and the **Grey Hands**, with **Jamie** and **Elroy** nowhere to be seen. They learned that **Captain Otihand**, leader of Waterdeep's Griffon Riders, had been murdered—and they were the prime suspects, being the last people seen at the crime scene. Though they proclaimed their innocence, they were given a chance to prove it by finding the real culprit within a set timeframe.\n\nAt the City of the Dead, the scene of the crime, they met **Nerisys Mistletoe**, who had discovered her friend's body. Their investigation yielded two potential suspects: **Lilly Nailo**, an out-of-town adventurer who had crossed paths with the Captain, and **Lieutenant Oswald Nygma**, his jealous second-in-command. During the encounter, they were strangly attacked by ghosts in the cemetery - which they managed to defeat. They then tracked down Lilly at the Yawning Portal, learning her Griffon had been impounded by the Griffon Cavalry.\n\nTheir pursuit then led them to Oswald Nygma's heavily fortified residence. After failing his worthiness test to enter, they managed to convince him to lower his defences for a conversation. Following a lead from both Lily and Oswald, they investigated the Hawklight estate, where Laplace attempted to speak with **Krisga Hawklight** alone while Vernon rested. The meeting was interrupted by her imposing father, **Lord Fluffy Hawklight**.\n\nSeeking help, Laplace visited Brandarth Hall to consult **Renaer**, who though occupied, gifted him a wooden Emerald Enclave flask. Reuniting with Vernon, they returned to the Hawklight villa, where they uncovered a tragic truth: Krisga, who had been in a secret relationship with Captain Otihand, had been manipulated into murdering him by a malevolent spirit. After a violent confrontation that ended with Lord Hawklight's death, they left Krisga in the care of her maid **Suzie**, and set back to the City of the Dead to investigate where Krisga had encountered her mysterious manipulator - The Crypt of the Seven.",
+    "tags": [
+      "#SessionRecap"
+    ]
+  },
+  {
+    "sessionNumber": 10.2,
+    "title": "Lif-Ception",
+    "date": "04/11/2022",
+    "day": "Ches 5th",
+    "description": "**Jamie** and **Elroy** awoke to the bustling sounds of a crowded tavern. They found themselves in a pristine version of Trollskull Manor, where their ghostly bartender **Lif** was alive and serving customers—they had been transported into his memories from over a century ago. In this dreamscape, they encountered **Richard Stone**, a private investigator who seemed to be a predecessor to **Vincent Trench**.\n\nThe truth slowly emerged: Lif had sensed a malevolent spirit approaching the manor and, in an attempt to protect all four companions, only managed to transport Jamie and Elroy to safety within his memories. Memory-Lif, unaware of anything beyond his own death, needed convincing of their connection to his future self. As they helped him recover these memories, they fell deeper into a strange amalgamation of dreams, where Jamie's unusual mindscape began bleeding into Lif's memories, manifesting visions of his childhood home and his caretaker, **Divona**.\n\nAs hostile spirits began invading the dream, causing it to collapse, Jamie and Elroy escaped into __The Ephemeral Emporium__—a mysterious ethereal shop dealing in secrets, dreams and memories, run by an elven man named **Liland**. This enigmatic establishment, only accessible by invitation, appeared randomly throughout the Ethereal Plane. While there, they witnessed Esvele Rosznar purchasing someone's dreams before departing, though she remained unaware of their presence. Gaining an invitation into the Emporium, they group bought some dreams and left to the Ethereal Plane. \n\nTrapped in the Ethereal Plane, the duo used Jamie's Box of Lingering Spirits to contact **Watchman Carrion Cromley** in the Material Plane, requesting his help to find them. Making their way back to the ethereal version of Trollskull Manor, they reunited with Lif, who helped summon the soul of his old friend, the wizard **Elban Fizzer**. While defending Fizzer from attacking spirits, he cast a spell to transport them to the place where the malevolent revenant's energy was strongest—the Crypt of the Seven.",
+    "tags": [
+      "#SessionRecap"
+    ]
+  },
+  {
+    "sessionNumber": 11,
+    "title": "Trapped!",
+    "date": "Invalid Date",
+    "day": "Ches 5th",
+    "description": "As Laplace and Vernon reached the entrance to the __Crypt of the Seven__, a portal from the Ethereal Plane suddenly ejected Elroy and Jamie, causing all four to collide. After exchanging tales of their separate morning adventures, they encountered **Sir Ambrose Everdawn**—an elderly, eccentric guard of the Crypt accompanied by his yellow faerie dragon companion. Age had left him unable to maintain his duties, and vicious creatures had locked him out of the mausoleum he once protected.\n\nThe party ventured into the Crypt—a dark shaft with manipulated gravity, dedicated to the seven Waterdhavian heroes who slayed the original **Manshoon**. As they navigated through various puzzles and chambers, they confronted two undead twins whose defeated souls manifested as a mysterious weapon. When Elroy first grasped it, the weapon took the form of a pen, though unknown to all, it carried a curse of vengeance.\n\nDuring their exploration of the crypt, **Marie** was killed amid the numerous battles and challenges they faced. Vernon taught Laplace how to resummon her soul—a process that revealed glimpses of Laplace's emerging shadow magic abilities.",
+    "tags": [
+      "#SessionRecap"
+    ]
+  },
+  {
+    "sessionNumber": 12,
+    "title": "You Embarrassed me!",
+    "date": "05/05/2022",
+    "day": "Ches 5th",
+    "description": "Breaking through a sealed entrance to the crypt's deeper chambers, the party encountered an army of Intellect Devourers guarded by an Animated Armor serving **Elroy**'s ex-wife, **Nala Ahmaergo**. After defeating it and claiming its Sending Stone, they discovered the Xanathar's Thieves' Guild had taken control of the lower levels. Their exploration yielded several discoveries: Elroy gained a book of Rituals that marked him with the Xanathar's symbol, Jamie found a peculiar beholder-shaped lollipop, and they uncovered \"Prototype 1 Crystal-Views\"—surveillance devices allowing remote viewing throughout the Crypt.\n\nWhile exploring the tombs of the seven heroes who defeated the original **Manshoon**, learning their histories and legacy, they ran into **Watchman Carrion Cromley**. Following his attempt to assist Jamie and Elroy, he had been attacked and possessed by an Intellect Devourer. The party managed to subdue him and recover his original brain.\n\nFinally, they confronted the malevolent revenant responsible for recent events: **Grum'Shar**, seeking revenge against the party for his previous demise. His elaborate scheme involved manipulating **Krisga** into killing **Captain Otihand** and framing the party for the murder. After brutaly destroying him, they a recovered note that revealed the **Bregan D'aerthe** had supplied Grum'Shar with Crystal-View prototypes for testing, suggesting he make a pact with Mother **Mirthkettle**—the hag who once inhabited Trollskull Manor—to gain power for his revenge.",
+    "tags": [
+      "#SessionRecap"
+    ]
+  },
+  {
+    "sessionNumber": 13,
+    "title": "The Aftermath",
+    "date": "05/12/2022",
+    "day": "Ches 5th",
+    "description": "As **Grum'Shar** met his second death, his final act was a spiteful one—using his remaining revenant power to bring down the Crypt around them. During the chaos of their escape with Grum'Shar's head and the unconscious **Carrion Cromley**, Jamie discovered a strange heart-shaped stone that drew him to keep it.\n\nRacing against time, Elroy brought Cromley to the House of Inspired Hands, where a fairy named **Remi** and her Nimblewright called **Nim** successfully saved his life. In gratitude, Elroy pledged to spread word of Gond's church. Meanwhile, **Meloon Wardragon** secured both Cromley and the Intellect Devourer, before helping Vernon and Laplace resolve the Hawklight situation. He extended an invitation for the party to potentially join the Grey Hands to which they rejected.\n\n**Elroy** and **Jamie**'s afternoon proved eventful: they revisited __The Ephemeral Emporium__ where Jamie purchased a dream of **Renaer**'s—before stopping at **Skeemo Weirdbottle**'s shop, __Weirdbottle Concotions__. After helping with a toppled carriage, they discovered its owner was **Lord Farris Margaster**, who rewarded them with Margaster watches. They later counselled a grieving **Bobby Newport**, helping him channel his anger over his brother's death by the Xanathar Guild into helping others affected by the gang war.\n\n**Laplace** went shopping and turned the tables on would-be muggers before taking a well-earned shower. Vernon returned home to receive crucial news from **Vincent Trench**—his mother, publicly believed dead, was actually alive.\n\nAmid these events, the party also dealt with the Turrie twins, **Torbie and Borreck**, who were fighting over a ring Jamie had previously found in the sewers. Each brother wanted this family heirloom to propose to **Mary McBeth**, though the party uncovered her scheme to pit the brothers against each other for their inheritance.",
+    "tags": [
+      "#SessionRecap"
+    ]
+  },
+  {
+    "sessionNumber": 14,
+    "title": "Vicar Vernon",
+    "date": "Invalid Date",
+    "day": "Ches 5th",
+    "description": "While Elroy rested and Laplace went book shopping, **Jamie** and Vernon **decided** to return the belongings Laplace had taken from some would-be muggers. Their journey to the Field Ward took them through a large protest against the potential return of the **Rosznar family**, who had been banished from Waterdeep a decade ago over slavery accusations.\n\nAt their destination, they found one of the muggers badly wounded and caring for his terminally ill daughter. Vernon, moved by their situation, used his healing abilities to cure both father and daughter, earning their profound gratitude.",
+    "tags": [
+      "#SessionRecap"
+    ]
+  },
+  {
+    "sessionNumber": 15,
+    "title": "The Runaway Carriage",
+    "date": "06/09/2022",
+    "day": "Ches 5th",
+    "description": "The party's paths diverged once again as events unfolded across Waterdeep. **Laplace** and **Elroy**, fresh from their respective errands, responded to urgent knocking at Trollskull Manor. A drow named **Bouchaugious** sought refuge from **The True Knights of Waterdeep**—a narcissistic, fascist group hunting him. While Elroy successfully misdirected the pursuers, Laplace kept a constant, wary watch on their drow guest, his caution stemming from his past experiences. The situation took an intriguing turn when the True Knights, after threatening **Vincent Trench**, entered his business only to emerge mysteriously beaten and scarred.\n\nMeanwhile, in the Sea Ward, Vernon and Jamie stumbled upon a Zhentarim raid of an innocuous-looking house on Phastal Street. Their pursuit of an escaping carriage led to an unexpected discovery: the building was actually a secret Asmodeus outpost. They managed to recover various items and information the Zhentarim had attempted to steal.",
+    "tags": [
+      "#SessionRecap"
+    ]
+  },
+  {
+    "sessionNumber": 16,
+    "title": "The King of the Rocks",
+    "date": "Invalid Date",
+    "day": "Ches 5th",
+    "description": "The party, dressed in their finest suits, made their way to the __Lightsinger Theatre__, stopping first at the **Old Xoblob Shop** where Vernon acquired Xoblob's Xenium Amulet to strengthen his connection with **Gazerath**. At the theatre, they attended the first act of \"The King of the Rocks\" before meeting with the Harpers during intermission in **Mirt**'s private booth.\n\nThere, they were introduced to Mirt's right hands: **Rose**, head of magic, and **Piper**, head of martials. While discussing potential Harper membership, Piper's initial hostility toward Laplace due to his past crimes set a tense atmosphere. The meeting culminated in both Elroy and Vernon joining the organization.\n\nWhen a Harper agent warned of an impending assassination attempt, Mirt quietly evacuated the theatre and enlisted the party's help. The __Bregan D'aerthe__ launched their attack using new technology—Smoke Powder—and strange projectile weapons. During the confrontation, Laplace made his first intentional kill, causing him to break down. In a pivotal moment, Piper, despite their previous antagonism, helped him regain composure, challenging him to prove himself better through actions rather than remorse.",
+    "tags": [
+      "#SessionRecap"
+    ]
+  },
+  {
+    "sessionNumber": 17,
+    "title": "The Sapphire Centre ",
+    "date": "Invalid Date",
+    "day": "Ches 5th",
+    "description": "Following the theatre confrontation, **Gazerath** arrived to witness **Vernon**'s unnecessarily brutal dispatch of the remaining assassins. Concerned, he offered to help Vernon channel his magic through his mother's love rather than his father's rage, agreeing to temporarily join the party in the process.\n\nTheir journey home led them to a mysterious tent—__the Sapphire Centre__—run by a large Holyphant named **Zozo**. This exclusive slavery ring, they discovered, counted both the Margaster and Rosznar families among its clientele. Vernon, guided by Zozo's judgment, purchased a Flumph named **Barry** (with the intention of freeing him), whose tragic past included the deaths of his siblings in captivity.\n\nThe long day finally drew to a close at Trollskull Manor, where they encountered the **Three Urchins** playing ball. The party extended their hospitality to both their new companions—Gazerath and Barry—and the children, offering cookies and shelter for the night.",
+    "tags": [
+      "#SessionRecap"
+    ]
   }
 ];
