@@ -1,4 +1,9 @@
 /* Base styles */
+
+:root {
+    --header-height: 80px; /* Adjust this value to match your actual header height */
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #1a1a1a;
@@ -66,12 +71,15 @@ nav ul {
     border-radius: 5px;
     padding: 1.5rem;
     position: fixed;
-    left: max(calc((100% - 1200px) / 2 + 1rem), 1rem); /* Aligns with container's left edge */
+    left: max(calc((100% - 1200px) / 2 + 1rem), 1rem);
     top: calc(var(--header-height) + 2rem);
-    max-height: calc(100vh - var(--header-height) - 4rem);
+    /* Set a fixed height and ensure scrolling */
+    height: calc(100vh - var(--header-height) - 4rem);
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #ffd700 #2a2a2a;
+    /* Smooth scrolling for the nav */
+    scroll-behavior: smooth;
 }
 
 /* Webkit scrollbar styling */

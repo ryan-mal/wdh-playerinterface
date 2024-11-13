@@ -216,23 +216,53 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.querySelectorAll('.journal-nav-link').forEach(link => {
                         link.classList.remove('active');
                     });
-                    
+
                     // Add active class to corresponding link
                     const id = entry.target.id;
                     const correspondingLink = document.querySelector(`.journal-nav-link[href="#${id}"]`);
                     if (correspondingLink) {
                         correspondingLink.classList.add('active');
+
+                        // Scroll the nav to keep the active link visible
+                        ensureLinkVisible(correspondingLink);
                     }
                 }
             });
         }, {
-            threshold: 0.5
+            threshold: 0.2,
+            rootMargin: '-20% 0px -60% 0px'
         });
 
         // Observe all journal entries
         document.querySelectorAll('.journal-entry').forEach(entry => {
             observer.observe(entry);
         });
+    }
+
+    function ensureLinkVisible(link) {
+        const nav = document.querySelector('.journal-nav');
+        const linkRect = link.getBoundingClientRect();
+        const navRect = nav.getBoundingClientRect();
+
+        // Calculate if link is outside visible area
+        const isAbove = linkRect.top < navRect.top;
+        const isBelow = linkRect.bottom > navRect.bottom;
+
+        if (isAbove) {
+            // Link is above visible area, scroll up
+            const scrollAmount = nav.scrollTop + (linkRect.top - navRect.top) - 20;
+            nav.scrollTo({
+                top: scrollAmount,
+                behavior: 'smooth'
+            });
+        } else if (isBelow) {
+            // Link is below visible area, scroll down
+            const scrollAmount = nav.scrollTop + (linkRect.bottom - navRect.bottom) + 20;
+            nav.scrollTo({
+                top: scrollAmount,
+                behavior: 'smooth'
+            });
+        }
     }
 
     function renderJournal() {
