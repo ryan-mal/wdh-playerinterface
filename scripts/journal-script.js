@@ -1,3 +1,21 @@
+// Add this at the start of your journal-script.js
+let headerHeight = 0;
+
+function calculateHeaderHeight() {
+    const header = document.querySelector('header');
+    if (header) {
+        headerHeight = header.getBoundingClientRect().height;
+        // Update CSS variable
+        document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+    }
+}
+
+// Call this after header is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Wait a short moment for header to fully render
+    setTimeout(calculateHeaderHeight, 100);
+});
+
 // Front matter parser
 function parseFrontMatter(content) {
     const frontMatterRegex = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/;
@@ -209,28 +227,51 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function addScrollSpy() {
+        // Create observer with adjusted root margin based on header height
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                const currentId = entry.target.id;
+                const currentSessionNumber = parseFloat(currentId.replace('session-', ''));
+                const baseSessionNumber = Math.floor(currentSessionNumber);
+
+                // Find all related simultaneous entries
+                const simultaneousEntries = Array.from(document.querySelectorAll('.journal-entry'))
+                    .filter(el => {
+                        const sessionNum = parseFloat(el.id.replace('session-', ''));
+                        // Match entries with same base number and decimal parts
+                        return Math.floor(sessionNum) === baseSessionNumber &&
+                            sessionNum % 1 !== 0 &&
+                            sessionNum % 1 !== 0.5; // Exclude .5 entries
+                    });
+
                 if (entry.isIntersecting) {
-                    // Remove active class from all links
+                    // Remove active class from all nav links first
                     document.querySelectorAll('.journal-nav-link').forEach(link => {
                         link.classList.remove('active');
                     });
 
-                    // Add active class to corresponding link
-                    const id = entry.target.id;
-                    const correspondingLink = document.querySelector(`.journal-nav-link[href="#${id}"]`);
-                    if (correspondingLink) {
-                        correspondingLink.classList.add('active');
-
-                        // Scroll the nav to keep the active link visible
-                        ensureLinkVisible(correspondingLink);
+                    // If this is part of a simultaneous entry group
+                    if (simultaneousEntries.length > 1) {
+                        simultaneousEntries.forEach(simEntry => {
+                            const link = document.querySelector(`.journal-nav-link[href="#${simEntry.id}"]`);
+                            if (link) {
+                                link.classList.add('active');
+                                ensureLinkVisible(link);
+                            }
+                        });
+                    } else {
+                        // Regular entry
+                        const link = document.querySelector(`.journal-nav-link[href="#${currentId}"]`);
+                        if (link) {
+                            link.classList.add('active');
+                            ensureLinkVisible(link);
+                        }
                     }
                 }
             });
         }, {
             threshold: 0.2,
-            rootMargin: '-20% 0px -60% 0px'
+            rootMargin: `-${headerHeight}px 0px -50% 0px`
         });
 
         // Observe all journal entries
